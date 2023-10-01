@@ -24,22 +24,22 @@ export function addVAT(originalPrice, vatRate) {
 	if (originalPrice === undefined)
 		throw new Error('originalPrice is requied');
 	if (vatRate === undefined) throw new Error('vatRate is required');
-	return Math.round(originalPrice * (100+vatRate))/100.0;
+	return Math.round(originalPrice * (100 + vatRate)) / 100.0;
 }
 
 export function getSalePrice(originalPrice, reduction) {
 	if (originalPrice === undefined)
 		throw new Error('originalPrice is required');
 	if (reduction === undefined) throw new Error('reduction is required');
-	return Math.floor(originalPrice*(100-reduction))/100.0;
+	return Math.floor(originalPrice * (100 - reduction)) / 100.0;
 }
 
 export function getMiddleCharacter(str) {
-	if (str === undefined || str.length == 0 ) throw new Error('Non-empty str is required');
+	if (str === undefined || str.length == 0) throw new Error('Non-empty str is required');
 	const halfStringLengthRoundedDown = Math.floor(str.length / 2);
-	const stringIsEvenLength = str.length %2 == 0;
+	const stringIsEvenLength = str.length % 2 == 0;
 	if (stringIsEvenLength) {
-		return str.charAt(halfStringLengthRoundedDown-1) + str.charAt(halfStringLengthRoundedDown);
+		return str.charAt(halfStringLengthRoundedDown - 1) + str.charAt(halfStringLengthRoundedDown);
 	} else {
 		return str.charAt(halfStringLengthRoundedDown);
 	}
@@ -47,7 +47,7 @@ export function getMiddleCharacter(str) {
 
 export function reverseWord(word) {
 	if (word === undefined) throw new Error('word is required');
-	return word.split('').map((letter, index, array) =>  array[array.length - index - 1]).join('');
+	return word.split('').map((letter, index, array) => array[array.length - index - 1]).join('');
 }
 
 export function reverseAllWords(words) {
@@ -62,7 +62,7 @@ export function countLinuxUsers(users) {
 
 export function getMeanScore(scores) {
 	if (scores === undefined) throw new Error('scores is required');
-	return Math.round(100*scores.reduce((total, value, _, array) => total + value/array.length, 0))/100.0;
+	return Math.round(100 * scores.reduce((total, value, _, array) => total + value / array.length, 0)) / 100.0;
 }
 
 export function simpleFizzBuzz(n) {

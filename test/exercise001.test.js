@@ -1,8 +1,8 @@
 import {
   capitalize,
   generateInitials,
-  addVAT,
   getSalePrice,
+  addVAT,
   getMiddleCharacter,
   reverseWord,
   reverseAllWords,
@@ -10,6 +10,7 @@ import {
   getMeanScore,
   simpleFizzBuzz,
 } from "../challenges/exercise001";
+
 
 describe("capitalize", () => {
   test("returns a capitalized string", () => {

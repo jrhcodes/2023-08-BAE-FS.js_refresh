@@ -5,7 +5,9 @@
 // Note: Be sure to read the corresponding .md file for each exercise, in the docs folder. 📘 👍
 
 export function capitalize(word) {
-	if (word === undefined) throw new Error('word is required');
+	if (!word || typeof word != 'string' || word === "") {
+		return word;
+	}
 
 	const firstLetter = word.charAt(0);
 	const firstLetterCapitalised = firstLetter.toUpperCase();
@@ -15,8 +17,15 @@ export function capitalize(word) {
 }
 
 export function generateInitials(firstName, lastName) {
-	if (firstName === undefined) throw new Error('firstName is required');
-	if (lastName === undefined) throw new Error('lastName is required');
+	if (firstName === undefined || firstName === '') throw new Error('firstName is required');
+	if (lastName === undefined | lastName === '') throw new Error('lastName is required');
+
+	if (typeof firstName !== 'string') throw new Error('firstName must be a string');
+	if (typeof lastName !== 'string') throw new Error('lastName must be a string');
+
+	if (!/^[A-Za-z]+$/.test(firstName)) throw new Error('firstName must contain only letters');
+	if (!/^[A-Za-z]+$/.test(lastName)) throw new Error('lastName must contain only letters');
+
 	return firstName.charAt(0).toUpperCase() + "." + lastName.charAt(0).toUpperCase();
 }
 
@@ -35,9 +44,9 @@ export function getSalePrice(originalPrice, reduction) {
 }
 
 export function getMiddleCharacter(str) {
-	if (str === undefined || str.length == 0) throw new Error('Non-empty str is required');
+	if (str === undefined || str.length === 0) throw new Error('Non-empty str is required');
 	const halfStringLengthRoundedDown = Math.floor(str.length / 2);
-	const stringIsEvenLength = str.length % 2 == 0;
+	const stringIsEvenLength = str.length % 2 === 0;
 	if (stringIsEvenLength) {
 		return str.charAt(halfStringLengthRoundedDown - 1) + str.charAt(halfStringLengthRoundedDown);
 	} else {
@@ -57,7 +66,7 @@ export function reverseAllWords(words) {
 
 export function countLinuxUsers(users) {
 	if (users === undefined) throw new Error('users is required');
-	return users.filter(user => user.type.toLowerCase() == 'linux').length;
+	return users.filter(user => user.type.toLowerCase() === 'linux').length;
 }
 
 export function getMeanScore(scores) {
@@ -67,8 +76,8 @@ export function getMeanScore(scores) {
 
 export function simpleFizzBuzz(n) {
 	if (n === undefined) throw new Error('n is required');
-	const fizzFactor = n % 3 == 0 ? 1 : 0;
-	const buzzFactor = n % 5 == 0 ? 2 : 0;
+	const fizzFactor = n % 3 === 0 ? 1 : 0;
+	const buzzFactor = n % 5 === 0 ? 2 : 0;
 	const call = [n, "fizz", "buzz", "fizzbuzz"];
 	return call[fizzFactor + buzzFactor];
 }

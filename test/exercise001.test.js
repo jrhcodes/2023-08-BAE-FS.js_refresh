@@ -19,8 +19,15 @@ describe("capitalize", () => {
     expect(capitalize("oh no, bears!!!")).toBe("Oh no, bears!!!");
   });
 
+  test("returns parameter if passed either and empty sting, null or non-alphabetical", () => {
+    expect(capitalize("")).toBe("");
+    expect(capitalize(null)).toBe(null);
+    expect(capitalize()).toBe();
+  });
+
   test("does nothing if the string is already capitalized", () => {
     expect(capitalize("Hello")).toBe("Hello");
+    expect(capitalize("Hello dolly, well hello")).toBe("Hello dolly, well hello");
   });
 });
 
@@ -28,6 +35,20 @@ describe("generateInitials", () => {
   test("returns the initials of a firstname and surname", () => {
     expect(generateInitials("Frederic", "Bonneville")).toBe("F.B");
   });
+  test("throws error if either name is empty or not passed", () => {
+    expect(() => generateInitials(undefined, "OOPS")).toThrow('firstName is required');
+    expect(() => generateInitials("OOPS", undefined)).toThrow('lastName is required');
+    expect(() => generateInitials("", "OOPS")).toThrow('firstName is required');
+    expect(() => generateInitials("OOPS", "")).toThrow('lastName is required');
+  });
+  test("throws error if string is not passed", () => {
+    expect(() => generateInitials(3, "OOPS")).toThrow('firstName must be a string');
+    expect(() => generateInitials("OOPS", /c/)).toThrow('lastName must be a string');
+    expect(() => generateInitials(/x/, "OOPS")).toThrow('firstName must be a string');
+    expect(() => generateInitials("OOPS", 234)).toThrow('lastName must be a string');
+  });
+
+
 });
 
 describe("addVAT", () => {

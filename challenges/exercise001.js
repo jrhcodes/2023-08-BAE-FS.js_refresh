@@ -62,7 +62,7 @@ export function countLinuxUsers(users) {
 
 export function getMeanScore(scores) {
 	if (scores === undefined) throw new Error('scores is required');
-	return Math.round(100*scores.reduce((total, value, _, array) => total += value/array.length, 0))/100.0;
+	return Math.round(100*scores.reduce((total, value, _, array) => total + value/array.length, 0))/100.0;
 }
 
 export function simpleFizzBuzz(n) {

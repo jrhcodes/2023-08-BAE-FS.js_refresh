@@ -24,14 +24,14 @@ export function addVAT(originalPrice, vatRate) {
 	if (originalPrice === undefined)
 		throw new Error('originalPrice is requied');
 	if (vatRate === undefined) throw new Error('vatRate is required');
-	return Math.round(originalPrice * (1+vatRate/100.0));
+	return Math.round(originalPrice * (100+vatRate))/100.0;
 }
 
 export function getSalePrice(originalPrice, reduction) {
 	if (originalPrice === undefined)
 		throw new Error('originalPrice is required');
 	if (reduction === undefined) throw new Error('reduction is required');
-	return Math.floor(originalPrice*(1-reduction/100.0));
+	return Math.floor(originalPrice*(100-reduction))/100.0;
 }
 
 export function getMiddleCharacter(str) {
@@ -47,25 +47,28 @@ export function getMiddleCharacter(str) {
 
 export function reverseWord(word) {
 	if (word === undefined) throw new Error('word is required');
-	// Add your code here!
+	return word.split('').map((letter, index, array) =>  array[array.length - index - 1]).join('');
 }
 
 export function reverseAllWords(words) {
 	if (words === undefined) throw new Error('words is required');
-	// Add your code here!
+	return words.map(word => reverseWord(word));
 }
 
 export function countLinuxUsers(users) {
 	if (users === undefined) throw new Error('users is required');
-	// Add your code here!
+	return users.filter(user => user.type.toLowerCase() == 'linux').length;
 }
 
 export function getMeanScore(scores) {
 	if (scores === undefined) throw new Error('scores is required');
-	// Add your code here!
+	return Math.round(100*scores.reduce((total, value, _, array) => total += value/array.length, 0))/100.0;
 }
 
 export function simpleFizzBuzz(n) {
 	if (n === undefined) throw new Error('n is required');
-	// Add your code here!
+	const fizzFactor = n % 3 == 0 ? 1 : 0;
+	const buzzFactor = n % 5 == 0 ? 2 : 0;
+	const call = [n, "fizz", "buzz", "fizzbuzz"];
+	return call[fizzFactor + buzzFactor];
 }

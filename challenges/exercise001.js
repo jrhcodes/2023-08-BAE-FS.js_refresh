@@ -1,4 +1,4 @@
-import {roundTo2DP, floorTo2DP} from './jrhmathutils.js';
+import {roundTo2DP, floorTo2DP} from './exlibrary.js';
 
 export function capitalize(word) {
 	if (!word || typeof word !== 'string' || word === "") {

@@ -10,3 +10,5 @@ export const floorToNDecimals = (value, n) => {
 
 export const floorTo2DP = (value ) => Math.floor(100*value)/100.0;
 export const roundTo2DP = (value ) => Math.round(100*value)/100.0;
+
+export const countCharOccurrences = (str, char) => str.split('').reduce((total, thisChar) => total + (char === thisChar ? 1 : 0), 0);

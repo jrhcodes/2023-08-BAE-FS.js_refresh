@@ -1,4 +1,4 @@
-import { roundTo2DP } from "./jrhmathutils";
+import { roundTo2DP } from "./exlibrary";
 
 export function findSmallNums(nums) {
 	if (!nums) throw new Error('nums is required');

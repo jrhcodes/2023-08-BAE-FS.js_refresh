@@ -1,7 +1,7 @@
 import {roundTo2DP, floorTo2DP} from './jrhmathutils.js';
 
 export function capitalize(word) {
-	if (!word || typeof word != 'string' || word === "") {
+	if (!word || typeof word !== 'string' || word === "") {
 		return word;
 	}
 

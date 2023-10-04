@@ -29,12 +29,12 @@ export function findVerbs(words) {
 	if (!words) throw new Error('words is required');
 	const returnArray = [];
 	for (const i in words) {
-		const stringSplitBySpaces = words[i].split(' ');
-		if (stringSplitBySpaces.length>1 && stringSplitBySpaces[0].toLowerCase() === 'to') {
-			returnArray.push(words[i]);
-		}
+		const word = words[i];
+		if (word.length > 3 && word.substring(0,3).toLowerCase() === 'to ') {
+			returnArray.push(word);
+        }
 	}
-	return returnArray;
+    return returnArray;
 	
 }
 
@@ -43,7 +43,7 @@ export function getIntegers(nums) {
 	const returnArray = [];
  	for (const i in nums) {
 		const value = nums[i];
-		if (value % 1.0 == 0) {
+		if (value % 1.0 === 0) {
 			returnArray.push(value);
 		}
 	}
@@ -72,10 +72,25 @@ export function getSquareRoots(nums) {
 export function findSentencesContaining(sentences, str) {
 	if (!sentences) throw new Error('sentences is required');
 	if (!str) throw new Error('str is required');
-	// Your code here
+	const lowerCaseStr = str.toLowerCase();
+	const returnArray = [];
+	for( const i in sentences) {
+		const sentence = sentences[i].toLowerCase();
+        if (sentence.indexOf(lowerCaseStr) !== -1) {
+             returnArray.push(sentences[i]);
+        }
+	}
+	return returnArray;
 }
 
 export function getLongestSides(triangles) {
 	if (!triangles) throw new Error('triangles is required');
-	// Your code here
+	const returnArray = [];
+	for( const i in triangles) {
+		const triangle = triangles[i];
+        const longestSide = Math.max(...triangle);
+        returnArray.push(longestSide);
+	}
+	return returnArray;
+
 }

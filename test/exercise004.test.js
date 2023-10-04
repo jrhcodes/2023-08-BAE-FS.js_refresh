@@ -53,6 +53,8 @@ describe("findVerbs", () => {
       "to sneak",
       "to squeak",
       "cheesemonger",
+      "to",
+      "to "
     ];
     expect(findVerbs(words)).toEqual(["to eat", "to sneak", "to squeak"]);
   });

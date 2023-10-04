@@ -1,8 +1,4 @@
-// 👉 	Each function below has some test cases in `exercise001.test.js`
-// 		You can run these tests with `npm test`.
-//  	All the test cases must pass for each function.
-
-// Note: Be sure to read the corresponding .md file for each exercise, in the docs folder. 📘 👍
+import {roundTo2DP, floorTo2DP} from './jrhmathutils.js';
 
 export function capitalize(word) {
 	if (!word || typeof word != 'string' || word === "") {
@@ -33,14 +29,15 @@ export function addVAT(originalPrice, vatRate) {
 	if (originalPrice === undefined)
 		throw new Error('originalPrice is requied');
 	if (vatRate === undefined) throw new Error('vatRate is required');
-	return Math.round(originalPrice * (100 + vatRate)) / 100.0;
+	return roundTo2DP(originalPrice * (1 + vatRate/100.0));
 }
 
 export function getSalePrice(originalPrice, reduction) {
 	if (originalPrice === undefined)
 		throw new Error('originalPrice is required');
 	if (reduction === undefined) throw new Error('reduction is required');
-	return Math.floor(originalPrice * (100 - reduction)) / 100.0;
+	// return Math.floor(originalPrice * (100 - reduction)) / 100.0;
+	return floorTo2DP(originalPrice * (1 - reduction/100.0));
 }
 
 export function getMiddleCharacter(str) {
@@ -71,7 +68,7 @@ export function countLinuxUsers(users) {
 
 export function getMeanScore(scores) {
 	if (scores === undefined) throw new Error('scores is required');
-	return Math.round(100 * scores.reduce((total, value, _, array) => total + value / array.length, 0)) / 100.0;
+	return roundTo2DP(scores.reduce((total, value, _, array) => total + value / array.length, 0));
 }
 
 export function simpleFizzBuzz(n) {

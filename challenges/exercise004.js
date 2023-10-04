@@ -2,87 +2,44 @@ import { roundTo2DP } from "./jrhmathutils";
 
 export function findSmallNums(nums) {
 	if (!nums) throw new Error('nums is required');
-	const returnArray = [];
-	nums.forEach(value => {
-		if (value < 1) {
-			returnArray.push(value);
-		}
-	} );
-	return returnArray;
+	return nums.filter(value => value < 1);
 }
 
 export function findNamesBeginningWith(names, char) {
 	if (!names) throw new Error('names is required');
 	if (!char) throw new Error('char is required');
-	const returnArray = [];
-	names.forEach(name => {
-        if (name[0] === char) {
-            returnArray.push(name);
-        }
-	});
-	return returnArray;
+	const lowerCaseChar = char.toLowerCase();
+	return names.filter(name => name.toLowerCase().startsWith(lowerCaseChar));
 }
 
 export function findVerbs(words) {
 	if (!words) throw new Error('words is required');
-	const returnArray = [];
-	words.forEach(word => {
-		if (word.length > 3 && word.substring(0,3).toLowerCase() === 'to ') {
-			returnArray.push(word);
-        }
-	});
-    return returnArray;
-	
+	return words.filter(word => word.length > 3 && word.substring(0,3).toLowerCase() === 'to ');
 }
 
 export function getIntegers(nums) {
 	if (!nums) throw new Error('nums is required');
-	const returnArray = [];
-	nums.forEach(value => {
-		if (value % 1.0 === 0) {
-			returnArray.push(value);
-		}
-	});
-	return returnArray;
+	return nums.filter(value => value % 1.0 === 0);
 }
 
 export function getCities(users) {
 	if (!users) throw new Error('users is required');
-	const returnArray = [];
-	users.forEach(user => {
-		returnArray.push(user.data.city.displayName);
-	});
-	return returnArray;
+	return users.map(user => user.data.city.displayName);
 }
 
 export function getSquareRoots(nums) {
 	if (!nums) throw new Error('nums is required');
-	const returnArray = [];
-	nums.forEach(value => {
-        returnArray.push(roundTo2DP(Math.sqrt(value)));
-    });
-	return returnArray;
+	return nums.map(value => roundTo2DP(Math.sqrt(value)));
 }
 
 export function findSentencesContaining(sentences, str) {
 	if (!sentences) throw new Error('sentences is required');
 	if (!str) throw new Error('str is required');
-	const lowerCaseStr = str.toLowerCase();
-	const returnArray = [];
-	sentences.forEach(sentence => {
-		if (sentence.toLowerCase().indexOf(lowerCaseStr) !== -1) {
-             returnArray.push(sentence);
-        }
-	});
-	return returnArray;
+	return sentences.filter(sentence => sentence.toLowerCase().indexOf(str.toLowerCase()) !== -1);
 }
 
 export function getLongestSides(triangles) {
 	if (!triangles) throw new Error('triangles is required');
-	const returnArray = [];
-	triangles.forEach(triangle => {
-        const longestSide = Math.max(...triangle);
-        returnArray.push(longestSide);
-	});
-	return returnArray;
+	return triangles.map(triangle => Math.max(...triangle));
+
 }

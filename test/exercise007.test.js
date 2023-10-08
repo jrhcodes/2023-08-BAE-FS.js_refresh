@@ -1,28 +1,28 @@
 import { sumDigits, createRange, getScreentimeAlertList, hexToRGB, findWinner } from "../challenges/exercise007";
 
 describe("exercise007 sumDigits tests", () => {
-    test("sumDigits() missing parameter throws error", () => {
+    test("missing/invalid parameter, throws error", () => {
         expect(() => sumDigits(undefined)).toThrow('n is required');
         expect(() => sumDigits()).toThrow('n is required');
     });
 
-    test("sumDigits() value tests", () => {
+    test("returns the sum of digits for integer values", () => {
         expect(sumDigits(123)).toBe(6);
         expect(sumDigits(-123)).toBe(6);
-        expect(sumDigits("123")).toBe(6);
+        expect(sumDigits("123.1")).toBe(7);
         expect(sumDigits("-123")).toBe(6);
         expect(sumDigits(0)).toBe(0);
         expect(sumDigits("0")).toBe(0);
         expect(sumDigits(null)).toBe(0);
         expect(sumDigits("")).toBe(0);
-        expect(sumDigits("1234567890")).toBe(1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 0);
-        expect(sumDigits("-1234567890")).toBe(1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 0);
+        expect(sumDigits("1234.567890")).toBe(1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 0);
+        expect(sumDigits(-12345678.90)).toBe(1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 0);
     });
 
 });
 
-describe("exercise007 createRange tests", () => {
-    test("createRange() missing/invalid parameter throws error", () => {
+describe("exercise007 createRange() tests", () => {
+    test("when missing/invalid parameter - throws error", () => {
         expect(() => createRange(undefined)).toThrow('start is required');
         expect(() => createRange()).toThrow('start is required');
         expect(() => createRange(1, undefined)).toThrow('end is required');
@@ -35,7 +35,7 @@ describe("exercise007 createRange tests", () => {
         expect(() => createRange(-2, -3, -2)).toThrow('step value will not increment/decrement from start to end');
     });
 
-    test("createRange() value tests", () => {
+    test("returns range array when given correct parameters", () => {
         expect(createRange(1, 10)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
         expect(createRange(10, 1)).toEqual([10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
         expect(createRange(0, 10, 2)).toEqual([0, 2, 4, 6, 8, 10]);
@@ -48,7 +48,7 @@ describe("exercise007 createRange tests", () => {
 
 describe("exercise007 getScreentimeAlertList tests", () => {
 
-    test("getScreentimeAlertList()", () => {
+    test("generates list of users overusing screen time given date", () => {
         const userData = [
             {
                 username: "beth_1234",
@@ -97,21 +97,18 @@ describe("exercise007 getScreentimeAlertList tests", () => {
         expect(getScreentimeAlertList(userData, '2019-06-31')).toEqual([]);
     });
 
-    test("getScreentimeAlertList() missing parameters", () => {
+    test("throws an error when given missing/invalid parameters", () => {
         expect(() => getScreentimeAlertList(undefined, '')).toThrow('users is required');
         expect(() => getScreentimeAlertList("users", undefined)).toThrow('date is required');
     });
 });
 
-describe("exercise007 hexToRGB tests", () => {
-});
-
-describe("exercise007 findWinner tests", () => {
-    test("findWinner() invalid parameters", () => {
+describe("findWinner() tests", () => {
+    test("throws an error with invalid parameters", () => {
         expect(() => findWinner(undefined)).toThrow('board is required');
     });
 
-    test("findWinner() row 0 X", () => {
+    test("check to see if there's a winner on row 0 X", () => {
         const board = [
             ["X", "X", "X"],
             ["X", "0", "0"],
@@ -119,7 +116,7 @@ describe("exercise007 findWinner tests", () => {
         ];
         expect(findWinner(board)).toBe("X");
     });
-    test("findWinner() row 1 X", () => {
+    test("check to see if there's a winner on row 1 X", () => {
         const board = [
             ["X", "0", "0"],
             ["X", "X", "X"],
@@ -127,7 +124,7 @@ describe("exercise007 findWinner tests", () => {
         ];
         expect(findWinner(board)).toBe("X");
     });
-    test("findWinner() row 2 X", () => {
+    test("check to see if there's a winner on row 2 X", () => {
         const board = [
             ["X", "0", "0"],
             ["0", "0", "X"],
@@ -136,7 +133,7 @@ describe("exercise007 findWinner tests", () => {
         expect(findWinner(board)).toBe("X");
     });
 
-    test("findWinner() col 0 X", () => {
+    test("check to see if there's a winner on col 0 X", () => {
         const board = [
             ["X", "X", "0"],
             ["X", "0", "X"],
@@ -145,7 +142,7 @@ describe("exercise007 findWinner tests", () => {
         expect(findWinner(board)).toBe("X");
     });
 
-    test("findWinner() col 1 X", () => {
+    test("check to see if there's a winner on col 1 X", () => {
         const board = [
             ["0", "X", "0"],
             ["X", "X", "0"],
@@ -154,7 +151,7 @@ describe("exercise007 findWinner tests", () => {
         expect(findWinner(board)).toBe("X");
     });
 
-    test("findWinner() col 2 X", () => {
+    test("check to see if there's a winner on col 2 X", () => {
         const board = [
             ["0", "X", "X"],
             ["X", "0", "X"],
@@ -162,7 +159,7 @@ describe("exercise007 findWinner tests", () => {
         ];
         expect(findWinner(board)).toBe("X");
     });
-    test("findWinner() diagonal 1 X", () => {
+    test("check to see if there's a winner on diagonal 1 X", () => {
         const board = [
             ["X", "0", "X"],
             ["X", "X", "0"],
@@ -170,7 +167,7 @@ describe("exercise007 findWinner tests", () => {
         ];
         expect(findWinner(board)).toBe("X");
     });
-    test("findWinner() diagonal 2 X", () => {
+    test("check to see if there's a winner on diagonal 2 X", () => {
         const board = [
             ["0", "0", "X"],
             ["X", "X", "0"],
@@ -178,7 +175,7 @@ describe("exercise007 findWinner tests", () => {
         ];
         expect(findWinner(board)).toBe("X");
     });
-    test("findWinner() row 0 0", () => {
+    test("check to see if there's a winner on row 0 0", () => {
         const board = [
             ["0", "0", "0"],
             ["0", "X", "X"],
@@ -186,7 +183,7 @@ describe("exercise007 findWinner tests", () => {
         ];
         expect(findWinner(board)).toBe("0");
     });
-    test("findWinner() row 1 0", () => {
+    test("check to see if there's a winner on row 1 0", () => {
         const board = [
             ["0", "X", "X"],
             ["0", "0", "0"],
@@ -194,7 +191,7 @@ describe("exercise007 findWinner tests", () => {
         ];
         expect(findWinner(board)).toBe("0");
     });
-    test("findWinner() row 2 0", () => {
+    test("check to see if there's a winner on row 2 0", () => {
         const board = [
             ["0", "X", "X"],
             ["X", "X", "0"],
@@ -203,7 +200,7 @@ describe("exercise007 findWinner tests", () => {
         expect(findWinner(board)).toBe("0");
     });
 
-    test("findWinner() col 0 0", () => {
+    test("check to see if there's a winner on col 0 0", () => {
         const board = [
             ["0", "0", "X"],
             ["0", "X", "0"],
@@ -212,7 +209,7 @@ describe("exercise007 findWinner tests", () => {
         expect(findWinner(board)).toBe("0");
     });
 
-    test("findWinner() col 1 0", () => {
+    test("check to see if there's a winner on col 1 0", () => {
         const board = [
             ["X", "0", "X"],
             ["0", "0", "X"],
@@ -221,7 +218,7 @@ describe("exercise007 findWinner tests", () => {
         expect(findWinner(board)).toBe("0");
     });
 
-    test("findWinner() col 2 0", () => {
+    test("check to see if there's a winner on col 2 0", () => {
         const board = [
             ["X", "0", "0"],
             ["0", "X", "0"],
@@ -229,7 +226,7 @@ describe("exercise007 findWinner tests", () => {
         ];
         expect(findWinner(board)).toBe("0");
     });
-    test("findWinner() diagonal 1 0", () => {
+    test("check to see if there's a winner on diagonal 1 0", () => {
         const board = [
             ["0", "X", "0"],
             ["0", "0", "X"],
@@ -237,7 +234,7 @@ describe("exercise007 findWinner tests", () => {
         ];
         expect(findWinner(board)).toBe("0");
     });
-    test("findWinner() diagonal 2 0", () => {
+    test("check to see if there's a winner on diagonal 2 0", () => {
         const board = [
             ["X", "X", "0"],
             ["0", "0", "X"],
@@ -246,7 +243,7 @@ describe("exercise007 findWinner tests", () => {
         expect(findWinner(board)).toBe("0");
     });
 
-    test("findWinner() no winner", () => {
+    test("check no winner", () => {
         const board = [
             ["X", "0", "0"],
             ["0", "X", "X"],
@@ -257,7 +254,7 @@ describe("exercise007 findWinner tests", () => {
 });
 
 describe("exercise007 hexToRGB tests", () => {
-    test("hexToRGB() invalid parameters", () => {
+    test("hexToRGB() throws error for invalid parameters", () => {
         expect(() => hexToRGB(undefined)).toThrow('hexStr is required');
         expect(() => hexToRGB("")).toThrow('Invalid hex color code');
         expect(() => hexToRGB("#00X000")).toThrow('Invalid hex color code');
@@ -265,7 +262,7 @@ describe("exercise007 hexToRGB tests", () => {
         expect(() => hexToRGB("#0F000")).toThrow('Invalid hex color code');
     });
 
-    test("hexToRGB() valid parameters", () => {
+    test("hexToRGB() retuurns rgb(red,green,blue) from valid hex string", () => {
         expect(hexToRGB("#000000")).toEqual("rgb(0,0,0)");
         expect(hexToRGB("#FFFFFF")).toEqual("rgb(255,255,255)");
         expect(hexToRGB("#FF0000")).toEqual("rgb(255,0,0)");

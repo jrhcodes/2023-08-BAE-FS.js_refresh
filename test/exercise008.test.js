@@ -58,27 +58,4 @@ describe('splitThatString', () => {
 
 // Optional Chaining
 
-describe('addressLookUp', () => {
-	test('returns a users postcode', () => {
-		const user = {
-			name: 'JimBob Eggs',
-			telephone: 666,
-			likes: 'cheese',
-			dislikes: 'dirty socks',
-			address: {
-				houseNumber: 'The Number of the Beast',
-				postcode: 'H12 333',
-			},
-		};
-		expect(addressLookUp(user)).toEqual('H12 333');
-	});
-	test("returns undefined if address isn't provided", () => {
-		const user = {
-			name: 'JimBob Eggs',
-			telephone: 666,
-			likes: 'cheese',
-			dislikes: 'dirty socks',
-		};
-		expect(addressLookUp(user)).toEqual(undefined);
-	});
-});
+

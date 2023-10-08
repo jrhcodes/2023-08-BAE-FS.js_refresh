@@ -14,6 +14,7 @@ import {
 
 describe("capitalize", () => {
   test("returns a capitalized string", () => {
+    expect(capitalize("")).toBe("");
     expect(capitalize("hello")).toBe("Hello");
     expect(capitalize("the quick fox")).toBe("The quick fox");
     expect(capitalize("oh no, bears!!!")).toBe("Oh no, bears!!!");
@@ -67,6 +68,11 @@ describe("addVAT", () => {
   test("adds a VAT of 0% to a price of 25", () => {
     expect(addVAT(25, 0)).toBe(25);
   });
+
+  test("error when parameters are missing", () => {
+    expect(() => addVAT(undefined, 20)).toThrow('originalPrice is required');
+    expect(() => addVAT(100, undefined)).toThrow('vatRate is required');
+  })
 });
 
 describe("getSalePrice", () => {

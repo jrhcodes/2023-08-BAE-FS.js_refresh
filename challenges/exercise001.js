@@ -27,7 +27,7 @@ export function generateInitials(firstName, lastName) {
 
 export function addVAT(originalPrice, vatRate) {
 	if (originalPrice === undefined)
-		throw new Error('originalPrice is requied');
+		throw new Error('originalPrice is required');
 	if (vatRate === undefined) throw new Error('vatRate is required');
 	return roundTo2DP(originalPrice * (1 + vatRate / 100.0));
 }
@@ -36,7 +36,6 @@ export function getSalePrice(originalPrice, reduction) {
 	if (originalPrice === undefined)
 		throw new Error('originalPrice is required');
 	if (reduction === undefined) throw new Error('reduction is required');
-	// return Math.floor(originalPrice * (100 - reduction)) / 100.0;
 	return floorTo2DP(originalPrice * (1 - reduction / 100.0));
 }
 

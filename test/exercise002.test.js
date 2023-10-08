@@ -7,6 +7,9 @@ import {
 } from '../challenges/exercise002';
 
 describe('getFillings', () => {
+	test('generates error when no parameter is passed', () => {
+		expect(() => getFillings()).toThrowError('ingredients is required');
+	});
 	test('returns the fillings of a sandwich', () => {
 		const sandwich = {
 			bread: 'Sourdough',
@@ -25,6 +28,10 @@ describe('getFillings', () => {
 });
 
 describe('isFromManchester', () => {
+	test(' generates error when no parameter is passed', () => {
+		expect(() => isFromManchester()).toThrowError('person is required');
+		expect(() => isFromManchester(undefined)).toThrowError('person is required');
+	})
 	test('returns true if the person is from Manchester', () => {
 		const person = {
 			name: 'Mohammed',
@@ -45,7 +52,10 @@ describe('isFromManchester', () => {
 });
 
 describe('getBusNumbers', () => {
-	// A bus can hold 40 people. This function should return how many buses are required for the number of people
+	test(' generates error when no parameter is passed', () => {
+		expect(() => getBusNumbers()).toThrowError('people is required');
+	});
+
 	test('returns 1 if all the people fit in 1 bus', () => {
 		expect(getBusNumbers(1)).toBe(1);
 		expect(getBusNumbers(10)).toBe(1);
@@ -74,6 +84,10 @@ describe('getBusNumbers', () => {
 });
 
 describe('countSheep', () => {
+	test(' generates error when no parameter is passed', () => {
+		expect(() => countSheep()).toThrowError('arr is required');
+	});
+
 	test('returns 0 if there are 0 sheep in the array', () => {
 		const arr = ['dog', 'badger', 'dog', 'dog', 'chicken'];
 		expect(countSheep(arr)).toBe(0);
@@ -143,5 +157,10 @@ describe('hasMPostCode', () => {
 			},
 		};
 		expect(hasMPostCode(person)).toBe(false);
+	});
+	test(' generates error when no parameter is passed', () => {
+		expect(() => hasMPostCode()).toThrowError('person is required');
+		expect(() => hasMPostCode(undefined)).toThrowError('person is required');
+		expect(() => hasMPostCode(null)).toThrowError('person is required');
 	});
 });

@@ -11,7 +11,7 @@ export function printColours(colours) {
 export function shoppingList(list, newItem) {
 	if (!list) throw new Error('list is required');
 	if (!newItem) throw new Error('newItem is required');
-	return [...list, newItem];
+	return [...list, ...newItem];
 }
 
 export function highestNumber(numbers) {
@@ -24,9 +24,7 @@ export function splitThatString(string) {
 	return [...string];
 }
 
-// Optional Chaining Bonus activity!
-
 export function addressLookUp(user) {
 	if (!user) throw new Error('user is required');
-	// Your solution using optional chaining here!
+	return user?.address?.postcode;
 }

@@ -174,7 +174,7 @@ describe("exercise007 findWinner tests", () => {
         const board = [
             ["0", "0", "X"],
             ["X", "X", "0"],
-            ["X", "X", "X"]
+            ["X", "0", "X"]
         ];
         expect(findWinner(board)).toBe("X");
     });
@@ -241,8 +241,52 @@ describe("exercise007 findWinner tests", () => {
         const board = [
             ["X", "X", "0"],
             ["0", "0", "X"],
-            ["0", "0", "0"]
+            ["0", "X", "0"]
         ];
         expect(findWinner(board)).toBe("0");
     });
+
+    test("findWinner() no winner", () => {
+        const board = [
+            ["X", "0", "0"],
+            ["0", "X", "X"],
+            ["0", "X", "0"]
+        ];
+        expect(findWinner(board)).toBe(null);
+    });
 });
+
+describe("exercise007 hexToRGB tests", () => {
+    test("hexToRGB() invalid parameters", () => {
+        expect(() => hexToRGB(undefined)).toThrow('hexStr is required');
+        expect(() => hexToRGB("")).toThrow('Invalid hex color code');
+        expect(() => hexToRGB("#00X000")).toThrow('Invalid hex color code');
+        expect(() => hexToRGB("0000000")).toThrow('Invalid hex color code');
+        expect(() => hexToRGB("#0F000")).toThrow('Invalid hex color code');
+    });
+
+    test("hexToRGB() valid parameters", () => {
+        expect(hexToRGB("#000000")).toEqual("rgb(0,0,0)");
+        expect(hexToRGB("#FFFFFF")).toEqual("rgb(255,255,255)");
+        expect(hexToRGB("#FF0000")).toEqual("rgb(255,0,0)");
+        expect(hexToRGB("#00FF00")).toEqual("rgb(0,255,0)");
+        expect(hexToRGB("#0000FF")).toEqual("rgb(0,0,255)");
+        expect(hexToRGB("#FFFF00")).toEqual("rgb(255,255,0)");
+        expect(hexToRGB("#00FFFF")).toEqual("rgb(0,255,255)");
+        expect(hexToRGB("#FF00FF")).toEqual("rgb(255,0,255)");
+        expect(hexToRGB("#102030")).toEqual("rgb(16,32,48)");
+        expect(hexToRGB("#201030")).toEqual("rgb(32,16,48)");
+        expect(hexToRGB("#103020")).toEqual("rgb(16,48,32)");
+        expect(hexToRGB("#301020")).toEqual("rgb(48,16,32)");
+        expect(hexToRGB("#203010")).toEqual("rgb(32,48,16)");
+        expect(hexToRGB("#302010")).toEqual("rgb(48,32,16)");
+        expect(hexToRGB("#ffffff")).toEqual("rgb(255,255,255)");
+        expect(hexToRGB("#ff0000")).toEqual("rgb(255,0,0)");
+        expect(hexToRGB("#00ff00")).toEqual("rgb(0,255,0)");
+        expect(hexToRGB("#0000ff")).toEqual("rgb(0,0,255)");
+        expect(hexToRGB("#ffff00")).toEqual("rgb(255,255,0)");
+        expect(hexToRGB("#00ffff")).toEqual("rgb(0,255,255)");
+        expect(hexToRGB("#ff00ff")).toEqual("rgb(255,0,255)");
+        expect(hexToRGB("#abcdef")).toEqual("rgb(171,205,239)");
+    });
+})

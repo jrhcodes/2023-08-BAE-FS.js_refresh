@@ -6,7 +6,6 @@ import {
   createMatrix,
   areWeCovered
 } from "../challenges/exercise006";
-import { filterArrayByString } from "../lib/exlib";
 
 describe("sumMultiples", () => {
   test("Throws error with no or null parameter", () => {

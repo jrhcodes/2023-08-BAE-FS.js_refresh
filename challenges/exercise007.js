@@ -84,7 +84,18 @@ export const getScreentimeAlertList = (users, date) => {
  */
 export const hexToRGB = (hexStr) => {
 	if (hexStr === undefined) throw new Error('hexStr is required');
+
+	if (!/^#[0-9A-Fa-f]{6}$/.test(hexStr)) {
+		throw new Error('Invalid hex color code');
+	}
+
+	const red = parseInt(hexStr.slice(1, 3), 16);
+	const green = parseInt(hexStr.slice(3, 5), 16);
+	const blue = parseInt(hexStr.slice(5, 7), 16);
+
+	return `rgb(${red},${green},${blue})`;
 };
+
 
 /**
  * This function takes a noughts and crosses board represented as an array, where an empty space is represented with null.
@@ -99,14 +110,14 @@ export const hexToRGB = (hexStr) => {
 export const findWinner = (board) => {
 
 	if (board === undefined) throw new Error('board is required');
-	
-	if (board.some(row => row.some(cell => cell === null))) 
+
+	if (board.some(row => row.some(cell => cell === null)))
 		return null;
-	
+
 
 	const checkRowWinner = () => {
 		const winningRow = board.find(row => row[0] === row[1] && row[0] === row[2]);
-        return (winningRow) ?  winningRow[0] : null;
+		return (winningRow) ? winningRow[0] : null;
 	};
 
 	const checkColumnWinner = () => {
@@ -128,7 +139,7 @@ export const findWinner = (board) => {
 		return null;
 	};
 
-	return checkRowWinner() || checkColumnWinner() || checkDiagonalWinner() || null;
+	return checkRowWinner() || checkColumnWinner() || checkDiagonalWinner();
 
 };
 

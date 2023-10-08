@@ -1,15 +1,15 @@
 import {
-    error_argumment_missing,
-    error_argument_type,
-    error_string_required,
-    error_number_required,
-    error_integer_required,
-    error_positive_integer_required,
-    error_array_required,
-    error_string_array_required,
-    error_positive_integer_array_required,
-    error_number_array_required,
-    error_integer_array_required,
+    errorMessageArgummentMissing,
+    errorMessageArgumentType,
+    errorMessageStringRequired,
+    errorMessageNumberRequired,
+    errorMessageIntegerRequired,
+    errorMessagePositiveIntegerRequired,
+    errorMessageArrayRequired,
+    errorMessageStringArrayRequired,
+    errorMessagePositiveIntegerArrayRequired,
+    errorMessageNumberArrayRequired,
+    errorMessageIntegerArrayRequired,
     argumentRequired,
     requiredNumberArgument,
     requiredIntegerArgument,
@@ -24,20 +24,35 @@ import {
 
 
 
-describe('error_argumment_missing', () => {
+describe('errorArgumment_missing', () => {
+
+    test('check error message text', () => {
+        const testVariable = 'test';
+        expect(errorMessageArgummentMissing({ testVariable })).toEqual(`argument 'testVariable' required`);
+        expect(errorMessageArgumentType({ testVariable }, 'Y')).toEqual(`argument 'testVariable' must be of type 'Y'`);
+        expect(errorMessageStringRequired({ testVariable })).toEqual(`argument 'testVariable' must be of type 'string'`);
+        expect(errorMessageNumberRequired({ testVariable })).toEqual(`argument 'testVariable' must be of type 'number'`);
+        expect(errorMessageIntegerRequired({ testVariable })).toEqual(`argument 'testVariable' must be of type 'integer'`);
+        expect(errorMessagePositiveIntegerRequired({ testVariable })).toEqual(`argument 'testVariable' must be of type 'positive integer'`);
+        expect(errorMessageArrayRequired({ testVariable })).toEqual(`argument 'testVariable' must be of type 'array'`);
+        expect(errorMessageStringArrayRequired({ testVariable })).toEqual(`argument 'testVariable' must be of type 'string array'`);
+        expect(errorMessagePositiveIntegerArrayRequired({ testVariable })).toEqual(`argument 'testVariable' must be of type 'positive integer array'`);
+        expect(errorMessageNumberArrayRequired({ testVariable })).toEqual(`argument 'testVariable' must be of type 'number array'`);
+        expect(errorMessageIntegerArrayRequired({ testVariable })).toEqual(`argument 'testVariable' must be of type 'integer array'`);
+    });
 
     test('should throw an error when an argument is missing', () => {
         const undefinedVariable = undefined;
-        expect(() => argumentRequired({ undefinedVariable })).toThrowError(error_argumment_missing({ undefinedVariable }));
-        expect(() => requiredNumberArgument({ undefinedVariable })).toThrowError(error_argumment_missing({ undefinedVariable }));
-        expect(() => requiredIntegerArgument({ undefinedVariable })).toThrowError(error_argumment_missing({ undefinedVariable }));
-        expect(() => requiredPositiveIntegerArgument({ undefinedVariable })).toThrowError(error_argumment_missing({ undefinedVariable }));
-        expect(() => requiredStringArgument({ undefinedVariable })).toThrowError(error_argumment_missing({ undefinedVariable }));
-        expect(() => requiredArrayArgument({ undefinedVariable })).toThrowError(error_argumment_missing({ undefinedVariable }));
-        expect(() => requiredStringArrayArgument({ undefinedVariable })).toThrowError(error_argumment_missing({ undefinedVariable }));
-        expect(() => requiredNumberArrayArgument({ undefinedVariable })).toThrowError(error_argumment_missing({ undefinedVariable }));
-        expect(() => requiredIntegerArrayArgument({ undefinedVariable })).toThrowError(error_argumment_missing({ undefinedVariable }));
-        expect(() => requiredPositiveIntegerArrayArgument({ undefinedVariable })).toThrowError(error_argumment_missing({ undefinedVariable }));
+        expect(() => argumentRequired({ undefinedVariable })).toThrowError(errorMessageArgummentMissing({ undefinedVariable }));
+        expect(() => requiredNumberArgument({ undefinedVariable })).toThrowError(errorMessageArgummentMissing({ undefinedVariable }));
+        expect(() => requiredIntegerArgument({ undefinedVariable })).toThrowError(errorMessageArgummentMissing({ undefinedVariable }));
+        expect(() => requiredPositiveIntegerArgument({ undefinedVariable })).toThrowError(errorMessageArgummentMissing({ undefinedVariable }));
+        expect(() => requiredStringArgument({ undefinedVariable })).toThrowError(errorMessageArgummentMissing({ undefinedVariable }));
+        expect(() => requiredArrayArgument({ undefinedVariable })).toThrowError(errorMessageArgummentMissing({ undefinedVariable }));
+        expect(() => requiredStringArrayArgument({ undefinedVariable })).toThrowError(errorMessageArgummentMissing({ undefinedVariable }));
+        expect(() => requiredNumberArrayArgument({ undefinedVariable })).toThrowError(errorMessageArgummentMissing({ undefinedVariable }));
+        expect(() => requiredIntegerArrayArgument({ undefinedVariable })).toThrowError(errorMessageArgummentMissing({ undefinedVariable }));
+        expect(() => requiredPositiveIntegerArrayArgument({ undefinedVariable })).toThrowError(errorMessageArgummentMissing({ undefinedVariable }));
     });
 
     const str = 'this is a string';
@@ -62,8 +77,8 @@ describe('error_argumment_missing', () => {
         const testValue = Object.values(testVariable)[0];
 
         if (typeof testValue != 'number') {
-            test(`test requiredNumberArgument(${Object.entries(testVariable)[0]}) throws error "${error_number_required(testVariable)}"`, () => {
-                expect(() => requiredNumberArgument(testVariable)).toThrowError(error_number_required(testVariable));
+            test(`test requiredNumberArgument(${Object.entries(testVariable)[0]}) throws error "${errorMessageNumberRequired(testVariable)}"`, () => {
+                expect(() => requiredNumberArgument(testVariable)).toThrowError(errorMessageNumberRequired(testVariable));
             });
         } else {
             test(`test requiredNumberArgument(${Object.entries(testVariable)[0]}) does not throw error.`, () => {
@@ -72,8 +87,8 @@ describe('error_argumment_missing', () => {
         }
 
         if (typeof testValue != 'string') {
-            test(`test requiredStringArgument(${Object.entries(testVariable)[0]}) throws error "${error_string_required(testVariable)}"`, () => {
-                expect(() => requiredStringArgument(testVariable)).toThrowError(error_string_required(testVariable));
+            test(`test requiredStringArgument(${Object.entries(testVariable)[0]}) throws error "${errorMessageStringRequired(testVariable)}"`, () => {
+                expect(() => requiredStringArgument(testVariable)).toThrowError(errorMessageStringRequired(testVariable));
             });
         } else {
             test(`test requiredStringArgument(${Object.entries(testVariable)[0]}) does not throw error.`, () => {
@@ -82,8 +97,8 @@ describe('error_argumment_missing', () => {
         }
 
         if (typeof testValue != 'number' || testValue % 1 != 0) {
-            test(`test requiredIntegerArgument(${Object.entries(testVariable)[0]}) throws error "${error_integer_required(testVariable)}"`, () => {
-                expect(() => requiredIntegerArgument(testVariable)).toThrowError(error_integer_required(testVariable));
+            test(`test requiredIntegerArgument(${Object.entries(testVariable)[0]}) throws error "${errorMessageIntegerRequired(testVariable)}"`, () => {
+                expect(() => requiredIntegerArgument(testVariable)).toThrowError(errorMessageIntegerRequired(testVariable));
             });
         } else {
             test(`test requiredNumberArgument(${Object.entries(testVariable)[0]}) does not throw error.`, () => {
@@ -92,8 +107,8 @@ describe('error_argumment_missing', () => {
         }
 
         if (typeof testValue != 'number' || testValue % 1 != 0 || testValue <= 0) {
-            test(`test requiredPositiveIntegerArgument(${Object.entries(testVariable)[0]}) throws error "${error_positive_integer_required(testVariable)}"`, () => {
-                expect(() => requiredPositiveIntegerArgument(testVariable)).toThrowError(error_positive_integer_required(testVariable));
+            test(`test requiredPositiveIntegerArgument(${Object.entries(testVariable)[0]}) throws error "${errorMessagePositiveIntegerRequired(testVariable)}"`, () => {
+                expect(() => requiredPositiveIntegerArgument(testVariable)).toThrowError(errorMessagePositiveIntegerRequired(testVariable));
             });
         } else {
             test(`test requiredNumberArgument(${Object.entries(testVariable)[0]}) does not throw error.`, () => {
@@ -102,8 +117,8 @@ describe('error_argumment_missing', () => {
         }
 
         if (!Array.isArray(testValue)) {
-            test(`test requiredArrayArgument(${Object.entries(testVariable)[0]}) throws error "${error_array_required(testVariable)}"`, () => {
-                expect(() => requiredArrayArgument(testVariable)).toThrowError(error_array_required(testVariable));
+            test(`test requiredArrayArgument(${Object.entries(testVariable)[0]}) throws error "${errorMessageArrayRequired(testVariable)}"`, () => {
+                expect(() => requiredArrayArgument(testVariable)).toThrowError(errorMessageArrayRequired(testVariable));
             });
         } else {
             test(`test requiredNumberArgument(${Object.entries(testVariable)[0]}) does not throw error.`, () => {

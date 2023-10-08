@@ -8,7 +8,7 @@
  */
 export const sumDigits = (n) => {
 	if (n === undefined) throw new Error('n is required');
-	return String(Math.abs(n)).split('').map(Number).reduce((total, i) => total + i, 0);
+	return [...String(Math.abs(n))].map(Number).reduce((total, i) => total + i, 0);
 };
 
 /**

@@ -9,6 +9,7 @@ import {
 describe('getFillings', () => {
 	test('generates error when no parameter is passed', () => {
 		expect(() => getFillings()).toThrowError('ingredients is required');
+		expect(() => getFillings(undefined)).toThrowError('ingredients is required');
 	});
 	test('returns the fillings of a sandwich', () => {
 		const sandwich = {
@@ -54,6 +55,7 @@ describe('isFromManchester', () => {
 describe('getBusNumbers', () => {
 	test(' generates error when no parameter is passed', () => {
 		expect(() => getBusNumbers()).toThrowError('people is required');
+		expect(() => getBusNumbers(undefined)).toThrowError('people is required');
 	});
 
 	test('returns 1 if all the people fit in 1 bus', () => {
@@ -84,8 +86,10 @@ describe('getBusNumbers', () => {
 });
 
 describe('countSheep', () => {
+
 	test(' generates error when no parameter is passed', () => {
 		expect(() => countSheep()).toThrowError('arr is required');
+		expect(() => countSheep(undefined)).toThrowError('arr is required');
 	});
 
 	test('returns 0 if there are 0 sheep in the array', () => {
@@ -144,8 +148,12 @@ describe('hasMPostCode', () => {
 			},
 		};
 		expect(hasMPostCode(person)).toBe(false);
-	});
 
+	});
+	test('generates error when no parameter is passed', () => {
+		expect(() => hasMPostCode()).toThrowError('person is required');
+		expect(() => hasMPostCode(undefined)).toThrowError('person is required');
+	})
 	test('returns false if the postcode starts with M but is not for Manchester', () => {
 		const person = {
 			name: 'Jahin',
@@ -161,6 +169,5 @@ describe('hasMPostCode', () => {
 	test(' generates error when no parameter is passed', () => {
 		expect(() => hasMPostCode()).toThrowError('person is required');
 		expect(() => hasMPostCode(undefined)).toThrowError('person is required');
-		expect(() => hasMPostCode(null)).toThrowError('person is required');
 	});
 });

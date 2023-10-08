@@ -20,6 +20,5 @@ export function countSheep(arr) {
 
 export function hasMPostCode(person) {
 	if (person === undefined) throw new Error('person is required');
-	const firstChars = person.address.postCode.match(/^[a-zA-Z]+/)[0];
-	return firstChars.toUpperCase() == "M";
+	return /^[Mm][^a-zA-Z]/.test(person.address.postCode);
 }

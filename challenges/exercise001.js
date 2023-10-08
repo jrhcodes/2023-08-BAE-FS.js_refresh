@@ -1,4 +1,4 @@
-import {roundTo2DP, floorTo2DP} from '../lib/exlib.js';
+import { roundTo2DP, floorTo2DP } from '../lib/exlib.js';
 
 export function capitalize(word) {
 	if (!word || typeof word !== 'string' || word === "") {
@@ -29,7 +29,7 @@ export function addVAT(originalPrice, vatRate) {
 	if (originalPrice === undefined)
 		throw new Error('originalPrice is requied');
 	if (vatRate === undefined) throw new Error('vatRate is required');
-	return roundTo2DP(originalPrice * (1 + vatRate/100.0));
+	return roundTo2DP(originalPrice * (1 + vatRate / 100.0));
 }
 
 export function getSalePrice(originalPrice, reduction) {
@@ -37,7 +37,7 @@ export function getSalePrice(originalPrice, reduction) {
 		throw new Error('originalPrice is required');
 	if (reduction === undefined) throw new Error('reduction is required');
 	// return Math.floor(originalPrice * (100 - reduction)) / 100.0;
-	return floorTo2DP(originalPrice * (1 - reduction/100.0));
+	return floorTo2DP(originalPrice * (1 - reduction / 100.0));
 }
 
 export function getMiddleCharacter(str) {
@@ -53,7 +53,7 @@ export function getMiddleCharacter(str) {
 
 export function reverseWord(word) {
 	if (word === undefined) throw new Error('word is required');
-	return word.split('').map((letter, index, array) => array[array.length - index - 1]).join('');
+	return [...word].map((letter, index, array) => array[array.length - index - 1]).join('');
 }
 
 export function reverseAllWords(words) {

@@ -65,11 +65,13 @@ export const getScreentimeAlertList = (users, date) => {
 	if (users === undefined) throw new Error('users is required');
 	if (date === undefined) throw new Error('date is required');
 
-	const usersFilteredByRequiredDate = users.filter(user => user.screenTime.some(item => item.date === date));
-	const usersWithSummedScreenTimeGreaterThan100OnDate = usersFilteredByRequiredDate.filter(user =>
-		Object.values(user.screenTime.find(screenTime => screenTime.date === date).usage)
-			.reduce((total, item) => total + item, 0) > 100);
-	return usersWithSummedScreenTimeGreaterThan100OnDate.map(user => user.username);
+	return users
+		.filter(user => {
+			const screenTimeEntry = user.screenTime.find(screenTime => screenTime.date === date);
+			const totalUsage = screenTimeEntry ? Object.values(screenTimeEntry.usage).reduce((total, item) => total + item, 0) : 0;
+			return totalUsage > 100;
+		})
+		.map(user => user.username);
 };
 
 /**

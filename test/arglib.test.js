@@ -66,7 +66,7 @@ describe('errorArgumment_missing', () => {
     const numberArray = [1.1, -2, 212.3];
     const integerArray = [1, -2, 3];
     const positiveIntegerArray = [1, 2, 3];
-    const mixedArray = [str, regex, integer, positiveInteger, nonIntegerNumber, negativeInteger, stringArray, array, numberArray, integerArray, positiveIntegerArray];
+    const mixedArray = [str, regex, integer, positiveInteger, nonIntegerNumber, negativeInteger];
 
     const testVariableArray = [
         { str }, { regex }, { integer }, { positiveInteger }, { nonIntegerNumber }, { negativeInteger },

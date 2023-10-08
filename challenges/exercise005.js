@@ -1,4 +1,4 @@
-import { countCharOccurrences } from "./exlibrary";
+import { countCharOccurrences } from "../lib/exlib";
 
 export const findNextNumber = (nums, n) => {
 	if (nums === undefined) throw new Error('nums is required');
@@ -33,7 +33,8 @@ export const arrShift = (arr) => {
 export const findNeedle = (haystack, searchTerm) => {
 	if (haystack === undefined) throw new Error('haystack is required');
 	if (searchTerm === undefined) throw new Error('searchTerm is required');
-	return Object.values(haystack).join().toLowerCase().includes(searchTerm.toLowerCase());
+	const lowerCaseSearchTerm = searchTerm.toLowerCase();
+	return Object.values(haystack).some(value => value.toString().toLowerCase().includes(lowerCaseSearchTerm));
 };
 
 export const getWordFrequencies = (str) => {

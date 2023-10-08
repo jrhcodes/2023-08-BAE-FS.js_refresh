@@ -1,4 +1,4 @@
-import { roundTo2DP } from "./exlibrary";
+import { roundTo2DP } from "../lib/exlib.js";
 
 export function findSmallNums(nums) {
 	if (!nums) throw new Error('nums is required');

@@ -10,7 +10,7 @@ import {
     errorMessagePositiveIntegerArrayRequired,
     errorMessageNumberArrayRequired,
     errorMessageIntegerArrayRequired,
-    argumentRequired,
+    requiredArgument,
     requiredNumberArgument,
     requiredIntegerArgument,
     requiredPositiveIntegerArgument,
@@ -43,7 +43,7 @@ describe('errorArgumment_missing', () => {
 
     test('should throw an error when an argument is missing', () => {
         const undefinedVariable = undefined;
-        expect(() => argumentRequired({ undefinedVariable })).toThrowError(errorMessageArgummentMissing({ undefinedVariable }));
+        expect(() => requiredArgument({ undefinedVariable })).toThrowError(errorMessageArgummentMissing({ undefinedVariable }));
         expect(() => requiredNumberArgument({ undefinedVariable })).toThrowError(errorMessageArgummentMissing({ undefinedVariable }));
         expect(() => requiredIntegerArgument({ undefinedVariable })).toThrowError(errorMessageArgummentMissing({ undefinedVariable }));
         expect(() => requiredPositiveIntegerArgument({ undefinedVariable })).toThrowError(errorMessageArgummentMissing({ undefinedVariable }));

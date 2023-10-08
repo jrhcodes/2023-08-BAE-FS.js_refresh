@@ -1,5 +1,5 @@
 import {
-	argumentRequired,
+	requiredArgument,
 	requiredNumberArrayArgument,
 	requiredArrayArgument,
 	requiredStringArgument
@@ -28,6 +28,6 @@ export function splitThatString(string) {
 }
 
 export function addressLookUp(user) {
-	argumentRequired({ user });
+	requiredArgument({ user });
 	return user?.address?.postcode;
 }

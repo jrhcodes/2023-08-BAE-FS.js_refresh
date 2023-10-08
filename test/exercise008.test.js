@@ -7,7 +7,7 @@ import {
 } from '../challenges/exercise008.js';
 
 import {
-	errorMessageArgummentMissing
+	errorMessageArgummentMissing, errorMessageStringRequired
 } from '../lib/arglib.js';
 
 describe('colours', () => {
@@ -68,6 +68,14 @@ describe('splitThatString', () => {
 		const string = undefined;
 		expect(() => splitThatString(string)).toThrow(errorMessageArgummentMissing({ string }));
 		expect(() => splitThatString()).toThrow(errorMessageArgummentMissing({ string }));
+	});
+
+	test('throws an error when non-string is passed', () => {
+		const string = undefined;
+		expect(() => splitThatString(0)).toThrow(errorMessageStringRequired({ string }));
+		expect(() => splitThatString(/w/)).toThrow(errorMessageStringRequired({ string }));
+		expect(() => splitThatString([])).toThrow(errorMessageStringRequired({ string }));
+		expect(() => splitThatString({})).toThrow(errorMessageStringRequired({ string }));
 	});
 });
 

@@ -4,7 +4,7 @@ import {
 	highestNumber,
 	splitThatString,
 	addressLookUp,
-} from '../challenges/exercise008-optional';
+} from '../challenges/exercise008.js';
 
 describe('colours', () => {
 	test('returns a list of colours', () => {

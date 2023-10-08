@@ -4,17 +4,17 @@ export const findNextNumber = (nums, n) => {
 	if (nums === undefined) throw new Error('nums is required');
 	if (n === undefined) throw new Error('n is required');
 	const index = nums.indexOf(n);
-	return (index === -1 || index === nums.length -1)  ? null : nums[index + 1];
+	return (index === -1 || index === nums.length - 1) ? null : nums[index + 1];
 };
 
 export const count1sand0s = (str) => {
 	if (str === undefined) throw new Error('str is required');
-	return { 1: countCharOccurrences(str, '1'), 0: countCharOccurrences(str, '0')};
+	return { 1: countCharOccurrences(str, '1'), 0: countCharOccurrences(str, '0') };
 };
 
 export const reverseNumber = (n) => {
 	if (n === undefined) throw new Error('n is required');
-	return Number(n.toString().split('').reverse().join(''));
+	return Number([...n.toString()].reverse().join(''));
 };
 
 export const sumArrays = (arrs) => {
@@ -27,7 +27,7 @@ export const arrShift = (arr) => {
 	if (arr === undefined) throw new Error('arr is required');
 	if (arr.length < 2) return arr;
 	if (arr.length == 2) return [arr[1], arr[0]];
-	return [arr[arr.length - 1],...arr.slice(1, arr.length - 1), arr[0]];
+	return [arr[arr.length - 1], ...arr.slice(1, arr.length - 1), arr[0]];
 };
 
 export const findNeedle = (haystack, searchTerm) => {
@@ -38,11 +38,11 @@ export const findNeedle = (haystack, searchTerm) => {
 };
 
 export const getWordFrequencies = (str) => {
-    if (str === undefined) throw new Error('str is required');
-    return str.toLowerCase().match(/\b\w+\b/g)
+	if (str === undefined) throw new Error('str is required');
+	return str.toLowerCase().match(/\b\w+\b/g)
 		.reduce((frequencies, word) => ({
 			...frequencies,
 			[word]: (frequencies[word] || 0) + 1,
-    }), {});
+		}), {});
 };
 

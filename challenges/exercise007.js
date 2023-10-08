@@ -8,6 +8,7 @@
  */
 export const sumDigits = (n) => {
 	if (n === undefined) throw new Error('n is required');
+	return String(Math.abs(n)).split('').map(Number).reduce((total, i) => total + i, 0);
 };
 
 /**
@@ -18,13 +19,17 @@ export const sumDigits = (n) => {
  * @param {Number} end
  * @param {Number} step
  */
-export const createRange = (start, end, step) => {
+export const createRange = (start, end, step = Math.sign(end - start)) => {
+
 	if (start === undefined) throw new Error('start is required');
 	if (end === undefined) throw new Error('end is required');
-	if (step === undefined)
-		console.log(
-			"FYI: Optional step parameter not provided. Remove this check once you've handled the optional step!"
-		);
+
+	const arrayLength = Math.abs(end - start) / Math.max(1, Math.abs(step)) + 1;
+
+	if ((step === 0 && start != end) || (start * step > end * step) || arrayLength % 1 != 0)
+		throw new Error('step value will not increment/decrement from start to end');
+
+	return Array.from({ length: arrayLength }, (_, index) => start + index * step);
 };
 
 /**
@@ -59,12 +64,11 @@ export const createRange = (start, end, step) => {
 export const getScreentimeAlertList = (users, date) => {
 	if (users === undefined) throw new Error('users is required');
 	if (date === undefined) throw new Error('date is required');
-	
+
 	const usersFilteredByRequiredDate = users.filter(user => user.screenTime.some(item => item.date === date));
-	const usersWithSummedScreenTimeGreaterThan100OnDate = usersFilteredByRequiredDate
-		.filter(user => 
-			Object.values(user.screenTime.find(screenTime => screenTime.date === date).usage)
-			.reduce( (total, item) => total + item, 0) > 100);
+	const usersWithSummedScreenTimeGreaterThan100OnDate = usersFilteredByRequiredDate.filter(user =>
+		Object.values(user.screenTime.find(screenTime => screenTime.date === date).usage)
+			.reduce((total, item) => total + item, 0) > 100);
 	return usersWithSummedScreenTimeGreaterThan100OnDate.map(user => user.username);
 };
 
@@ -93,5 +97,38 @@ export const hexToRGB = (hexStr) => {
  * @param {Array} board
  */
 export const findWinner = (board) => {
+
 	if (board === undefined) throw new Error('board is required');
+	
+	if (board.some(row => row.some(cell => cell === null))) 
+		return null;
+	
+
+	const checkRowWinner = () => {
+		const winningRow = board.find(row => row[0] === row[1] && row[0] === row[2]);
+        return (winningRow) ?  winningRow[0] : null;
+	};
+
+	const checkColumnWinner = () => {
+		for (let col = 0; col < 3; col++) {
+			if (board[0][col] === board[1][col] && board[1][col] === board[2][col]) {
+				return board[0][col];
+			}
+		}
+		return null;
+	};
+
+	const checkDiagonalWinner = () => {
+		if (
+			(board[0][0] === board[1][1] && board[1][1] === board[2][2]) ||
+			(board[0][2] === board[1][1] && board[1][1] === board[2][0])
+		) {
+			return board[1][1];
+		}
+		return null;
+	};
+
+	return checkRowWinner() || checkColumnWinner() || checkDiagonalWinner() || null;
+
 };
+

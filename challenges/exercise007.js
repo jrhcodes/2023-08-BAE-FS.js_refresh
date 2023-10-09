@@ -7,8 +7,11 @@
  * @param {Number} n
  */
 export const sumDigits = (n) => {
-	if (n === undefined) throw new Error('n is required');
-	return [...String(Math.abs(n))].filter(digit => '0' <= digit && '9' >= digit).map(Number).reduce((total, i) => total + i, 0);
+  if (n === undefined) throw new Error("n is required");
+  return [...String(Math.abs(n))]
+    .filter((digit) => "0" <= digit && "9" >= digit)
+    .map(Number)
+    .reduce((total, i) => total + i, 0);
 };
 
 /**
@@ -20,16 +23,24 @@ export const sumDigits = (n) => {
  * @param {Number} step
  */
 export const createRange = (start, end, step = Math.sign(end - start)) => {
+  if (start === undefined) throw new Error("start is required");
+  if (end === undefined) throw new Error("end is required");
 
-	if (start === undefined) throw new Error('start is required');
-	if (end === undefined) throw new Error('end is required');
+  const arrayLength = Math.abs(end - start) / Math.max(1, Math.abs(step)) + 1;
 
-	const arrayLength = Math.abs(end - start) / Math.max(1, Math.abs(step)) + 1;
+  if (
+    (step === 0 && start != end) ||
+    start * step > end * step ||
+    arrayLength % 1 != 0
+  )
+    throw new Error(
+      "step value will not increment/decrement from start to end"
+    );
 
-	if ((step === 0 && start != end) || (start * step > end * step) || arrayLength % 1 != 0)
-		throw new Error('step value will not increment/decrement from start to end');
-
-	return Array.from({ length: arrayLength }, (_, index) => start + index * step);
+  return Array.from(
+    { length: arrayLength },
+    (_, index) => start + index * step
+  );
 };
 
 /**
@@ -62,16 +73,23 @@ export const createRange = (start, end, step = Math.sign(end - start)) => {
  * @param {Array} users
  */
 export const getScreentimeAlertList = (users, date) => {
-	if (users === undefined) throw new Error('users is required');
-	if (date === undefined) throw new Error('date is required');
+  if (users === undefined) throw new Error("users is required");
+  if (date === undefined) throw new Error("date is required");
 
-	return users
-		.filter(user => {
-			const screenTimeEntry = user.screenTime.find(screenTime => screenTime.date === date);
-			const totalUsage = screenTimeEntry ? Object.values(screenTimeEntry.usage).reduce((total, item) => total + item, 0) : 0;
-			return totalUsage > 100;
-		})
-		.map(user => user.username);
+  return users
+    .filter((user) => {
+      const screenTimeEntry = user.screenTime.find(
+        (screenTime) => screenTime.date === date
+      );
+      const totalUsage = screenTimeEntry
+        ? Object.values(screenTimeEntry.usage).reduce(
+            (total, item) => total + item,
+            0
+          )
+        : 0;
+      return totalUsage > 100;
+    })
+    .map((user) => user.username);
 };
 
 /**
@@ -85,19 +103,18 @@ export const getScreentimeAlertList = (users, date) => {
  * @param {String} str
  */
 export const hexToRGB = (hexStr) => {
-	if (hexStr === undefined) throw new Error('hexStr is required');
+  if (hexStr === undefined) throw new Error("hexStr is required");
 
-	if (!/^#[0-9A-Fa-f]{6}$/.test(hexStr)) {
-		throw new Error('Invalid hex color code');
-	}
+  if (!/^#[0-9A-Fa-f]{6}$/.test(hexStr)) {
+    throw new Error("Invalid hex color code");
+  }
 
-	const red = parseInt(hexStr.slice(1, 3), 16);
-	const green = parseInt(hexStr.slice(3, 5), 16);
-	const blue = parseInt(hexStr.slice(5, 7), 16);
+  const red = parseInt(hexStr.slice(1, 3), 16);
+  const green = parseInt(hexStr.slice(3, 5), 16);
+  const blue = parseInt(hexStr.slice(5, 7), 16);
 
-	return `rgb(${red},${green},${blue})`;
+  return `rgb(${red},${green},${blue})`;
 };
-
 
 /**
  * This function takes a noughts and crosses board represented as an array, where an empty space is represented with null.
@@ -110,38 +127,35 @@ export const hexToRGB = (hexStr) => {
  * @param {Array} board
  */
 export const findWinner = (board) => {
+  if (board === undefined) throw new Error("board is required");
 
-	if (board === undefined) throw new Error('board is required');
+  if (board.some((row) => row.some((cell) => cell === null))) return null;
 
-	if (board.some(row => row.some(cell => cell === null)))
-		return null;
+  const checkRowWinner = () => {
+    const winningRow = board.find(
+      (row) => row[0] === row[1] && row[0] === row[2]
+    );
+    return winningRow ? winningRow[0] : null;
+  };
 
+  const checkColumnWinner = () => {
+    for (let col = 0; col < 3; col++) {
+      if (board[0][col] === board[1][col] && board[1][col] === board[2][col]) {
+        return board[0][col];
+      }
+    }
+    return null;
+  };
 
-	const checkRowWinner = () => {
-		const winningRow = board.find(row => row[0] === row[1] && row[0] === row[2]);
-		return (winningRow) ? winningRow[0] : null;
-	};
+  const checkDiagonalWinner = () => {
+    if (
+      (board[0][0] === board[1][1] && board[1][1] === board[2][2]) ||
+      (board[0][2] === board[1][1] && board[1][1] === board[2][0])
+    ) {
+      return board[1][1];
+    }
+    return null;
+  };
 
-	const checkColumnWinner = () => {
-		for (let col = 0; col < 3; col++) {
-			if (board[0][col] === board[1][col] && board[1][col] === board[2][col]) {
-				return board[0][col];
-			}
-		}
-		return null;
-	};
-
-	const checkDiagonalWinner = () => {
-		if (
-			(board[0][0] === board[1][1] && board[1][1] === board[2][2]) ||
-			(board[0][2] === board[1][1] && board[1][1] === board[2][0])
-		) {
-			return board[1][1];
-		}
-		return null;
-	};
-
-	return checkRowWinner() || checkColumnWinner() || checkDiagonalWinner();
-
+  return checkRowWinner() || checkColumnWinner() || checkDiagonalWinner();
 };
-

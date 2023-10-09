@@ -4,13 +4,13 @@ import {
   getComplementaryDNA,
   isItPrime,
   createMatrix,
-  areWeCovered
+  areWeCovered,
 } from "../challenges/exercise006";
 
 describe("sumMultiples", () => {
   test("Throws error with no or null parameter", () => {
-    expect(() => sumMultiples(undefined)).toThrowError('arr is required');
-    expect(() => sumMultiples()).toThrowError('arr is required');
+    expect(() => sumMultiples(undefined)).toThrowError("arr is required");
+    expect(() => sumMultiples()).toThrowError("arr is required");
   });
 
   test("returns rmpty array when passed empty array", () => {
@@ -28,8 +28,8 @@ describe("sumMultiples", () => {
 
 describe("isValidDNA", () => {
   test("Throws error with no or null parameter", () => {
-    expect(() => isValidDNA(undefined)).toThrowError('str is required');
-    expect(() => isValidDNA()).toThrowError('str is required');
+    expect(() => isValidDNA(undefined)).toThrowError("str is required");
+    expect(() => isValidDNA()).toThrowError("str is required");
   });
 
   test("returns false when passed array is invalid DNA sequence", () => {
@@ -42,8 +42,13 @@ describe("isValidDNA", () => {
     expect(isValidDNA("GTc@")).toBe(false);
     expect(isValidDNA("zAT")).toBe(false);
     expect(isValidDNA("")).toBe(false);
-    "bdefhijklmnopqrsuvwxyz".split("").forEach(char => expect(isValidDNA(char)).toBe(false));
-    "bdefhijklmnopqrsuvwxyz".toUpperCase().split("").forEach(char => expect(isValidDNA(char)).toBe(false));
+    "bdefhijklmnopqrsuvwxyz"
+      .split("")
+      .forEach((char) => expect(isValidDNA(char)).toBe(false));
+    "bdefhijklmnopqrsuvwxyz"
+      .toUpperCase()
+      .split("")
+      .forEach((char) => expect(isValidDNA(char)).toBe(false));
   });
 
   test("returns true for valid sequences", () => {
@@ -59,65 +64,93 @@ describe("isValidDNA", () => {
     expect(isValidDNA("T")).toBe(true);
     expect(isValidDNA("t")).toBe(true);
     expect(isValidDNA("ACACGTacgtGACGTacgtTaACGTaACGTacgtcgtcgt")).toBe(true);
-
   });
-
 });
 
 describe("getComplementaryDNA", () => {
   test("Throws error with no or null parameter", () => {
-    expect(() => getComplementaryDNA(undefined)).toThrowError('str is required');
-    expect(() => getComplementaryDNA()).toThrowError('str is required');
+    expect(() => getComplementaryDNA(undefined)).toThrowError(
+      "str is required"
+    );
+    expect(() => getComplementaryDNA()).toThrowError("str is required");
   });
 
   test("throws error when passed array is invalid DNA sequence", () => {
-    expect(() => getComplementaryDNA("ALSDJKLAKSJD")).toThrowError('str is not a valid DNA sequence');
-    expect(() => getComplementaryDNA("ACGTSADKJE93asd")).toThrowError('str is not a valid DNA sequence');
-    expect(() => getComplementaryDNA("1ACG")).toThrowError('str is not a valid DNA sequence');
-    expect(() => getComplementaryDNA("AdCT")).toThrowError('str is not a valid DNA sequence');
-    expect(() => getComplementaryDNA("ATfG")).toThrowError('str is not a valid DNA sequence');
-    expect(() => getComplementaryDNA("gmCGT")).toThrowError('str is not a valid DNA sequence');
-    expect(() => getComplementaryDNA("GTc@")).toThrowError('str is not a valid DNA sequence');
-    expect(() => getComplementaryDNA("zAT")).toThrowError('str is not a valid DNA sequence');
-    expect(() => getComplementaryDNA("")).toThrowError('str is not a valid DNA sequence');
-    "bdefhijklmnopqrsuvwxyz".split("").
-      forEach(char => expect(() => getComplementaryDNA(char)).toThrowError('str is not a valid DNA sequence'));
-    "bdefhijklmnopqrsuvwxyz".toUpperCase().split("").
-      forEach(char => expect(() => getComplementaryDNA(char)).toThrowError('str is not a valid DNA sequence'));
+    expect(() => getComplementaryDNA("ALSDJKLAKSJD")).toThrowError(
+      "str is not a valid DNA sequence"
+    );
+    expect(() => getComplementaryDNA("ACGTSADKJE93asd")).toThrowError(
+      "str is not a valid DNA sequence"
+    );
+    expect(() => getComplementaryDNA("1ACG")).toThrowError(
+      "str is not a valid DNA sequence"
+    );
+    expect(() => getComplementaryDNA("AdCT")).toThrowError(
+      "str is not a valid DNA sequence"
+    );
+    expect(() => getComplementaryDNA("ATfG")).toThrowError(
+      "str is not a valid DNA sequence"
+    );
+    expect(() => getComplementaryDNA("gmCGT")).toThrowError(
+      "str is not a valid DNA sequence"
+    );
+    expect(() => getComplementaryDNA("GTc@")).toThrowError(
+      "str is not a valid DNA sequence"
+    );
+    expect(() => getComplementaryDNA("zAT")).toThrowError(
+      "str is not a valid DNA sequence"
+    );
+    expect(() => getComplementaryDNA("")).toThrowError(
+      "str is not a valid DNA sequence"
+    );
+    "bdefhijklmnopqrsuvwxyz"
+      .split("")
+      .forEach((char) =>
+        expect(() => getComplementaryDNA(char)).toThrowError(
+          "str is not a valid DNA sequence"
+        )
+      );
+    "bdefhijklmnopqrsuvwxyz"
+      .toUpperCase()
+      .split("")
+      .forEach((char) =>
+        expect(() => getComplementaryDNA(char)).toThrowError(
+          "str is not a valid DNA sequence"
+        )
+      );
   });
 
   test("returns correct complementary DNA sequence", () => {
-
-
     const testValues = [
-      { test: 'a', expected: 'T' },
-      { test: 'c', expected: 'G' },
-      { test: 'g', expected: 'C' },
-      { test: 't', expected: 'A' },
-      { test: 'A', expected: 'T' },
-      { test: 'C', expected: 'G' },
-      { test: 'G', expected: 'C' },
-      { test: 'T', expected: 'A' },
-      { test: 'AGCT', expected: 'TCGA' },
-      { test: 'agct', expected: 'TCGA' },
-      { test: 'AGG', expected: 'TCC' },
-      { test: 'AaaaaAAaA', expected: 'TTTTTTTTT' },
-      { test: 'GGggggGGGG', expected: 'CCCCCCCCCC' },
-      { test: 'CCCcccCCCC', expected: 'GGGGGGGGGG' },
-      { test: 'TTtttT', expected: 'AAAAAA' },
-      { test: 'ACACGTacgtGACGTacgtTaACGTaACGTacgtcgtcgt', expected: 'TGTGCATGCACTGCATGCAATTGCATTGCATGCAGCAGCA' }
+      { test: "a", expected: "T" },
+      { test: "c", expected: "G" },
+      { test: "g", expected: "C" },
+      { test: "t", expected: "A" },
+      { test: "A", expected: "T" },
+      { test: "C", expected: "G" },
+      { test: "G", expected: "C" },
+      { test: "T", expected: "A" },
+      { test: "AGCT", expected: "TCGA" },
+      { test: "agct", expected: "TCGA" },
+      { test: "AGG", expected: "TCC" },
+      { test: "AaaaaAAaA", expected: "TTTTTTTTT" },
+      { test: "GGggggGGGG", expected: "CCCCCCCCCC" },
+      { test: "CCCcccCCCC", expected: "GGGGGGGGGG" },
+      { test: "TTtttT", expected: "AAAAAA" },
+      {
+        test: "ACACGTacgtGACGTacgtTaACGTaACGTacgtcgtcgt",
+        expected: "TGTGCATGCACTGCATGCAATTGCATTGCATGCAGCAGCA",
+      },
     ];
-    testValues.forEach(value => {
+    testValues.forEach((value) => {
       expect(getComplementaryDNA(value.test)).toBe(value.expected);
     });
-
   });
 });
 describe("isItPrime", () => {
-
   test("Throws error with no or null parameter", () => {
-    expect(() => isItPrime(undefined)).toThrowError('n is required');
-    expect(() => isItPrime()).toThrowError('n is required');
+    expect(() => isItPrime(undefined)).toThrowError("n is required");
+    expect(() => isItPrime()).toThrowError("n is required");
   });
 
   test("returns true for prime values", () => {
@@ -140,38 +173,46 @@ describe("isItPrime", () => {
     expect(isItPrime(85997179)).toBe(false);
     expect(isItPrime(1129.32)).toBe(false);
   });
-
 });
 
 describe("createMatrix", () => {
   test("creates a matrix", () => {
     expect(createMatrix(1, "")).toEqual([[""]]);
-    expect(createMatrix(2, "")).toEqual([["", ""], ["", ""]]);
+    expect(createMatrix(2, "")).toEqual([
+      ["", ""],
+      ["", ""],
+    ]);
     expect(createMatrix(1, "x")).toEqual([["x"]]);
-    expect(createMatrix(2, "x")).toEqual([["x", "x"], ["x", "x"]]);
+    expect(createMatrix(2, "x")).toEqual([
+      ["x", "x"],
+      ["x", "x"],
+    ]);
     expect(createMatrix(1, "longerword")).toEqual([["longerword"]]);
 
     expect(createMatrix(2, "longerword")).toEqual([
       ["longerword", "longerword"],
-      ["longerword", "longerword"]]);
+      ["longerword", "longerword"],
+    ]);
 
     expect(createMatrix(3, "longerword")).toEqual([
       ["longerword", "longerword", "longerword"],
       ["longerword", "longerword", "longerword"],
-      ["longerword", "longerword", "longerword"]]);
+      ["longerword", "longerword", "longerword"],
+    ]);
 
     expect(createMatrix(4, "longerword")).toEqual([
       ["longerword", "longerword", "longerword", "longerword"],
       ["longerword", "longerword", "longerword", "longerword"],
       ["longerword", "longerword", "longerword", "longerword"],
-      ["longerword", "longerword", "longerword", "longerword"]]);
+      ["longerword", "longerword", "longerword", "longerword"],
+    ]);
 
     expect(createMatrix(5, "longerword")).toEqual([
       ["longerword", "longerword", "longerword", "longerword", "longerword"],
       ["longerword", "longerword", "longerword", "longerword", "longerword"],
       ["longerword", "longerword", "longerword", "longerword", "longerword"],
       ["longerword", "longerword", "longerword", "longerword", "longerword"],
-      ["longerword", "longerword", "longerword", "longerword", "longerword"]
+      ["longerword", "longerword", "longerword", "longerword", "longerword"],
     ]);
 
     {
@@ -179,8 +220,10 @@ describe("createMatrix", () => {
       const contents = "very long sentences might be tricky";
       const bigMatrix = createMatrix(size, contents);
       expect(bigMatrix.length).toBe(size);
-      expect(bigMatrix.every(row => row.length === size)).toBe(true);
-      expect(bigMatrix.every(row => row.every(string => string == contents))).toBe(true);
+      expect(bigMatrix.every((row) => row.length === size)).toBe(true);
+      expect(
+        bigMatrix.every((row) => row.every((string) => string == contents))
+      ).toBe(true);
     }
 
     {
@@ -188,31 +231,46 @@ describe("createMatrix", () => {
       const contents = 12;
       const bigMatrix = createMatrix(size, contents);
       expect(bigMatrix.length).toBe(size);
-      expect(bigMatrix.every(row => row.length === size)).toBe(true);
-      expect(bigMatrix.every(row => row.every(string => string == contents))).toBe(true);
+      expect(bigMatrix.every((row) => row.length === size)).toBe(true);
+      expect(
+        bigMatrix.every((row) => row.every((string) => string == contents))
+      ).toBe(true);
     }
   });
 
   test("throws error with first parameter missing", () => {
-    expect(() => createMatrix()).toThrowError('n is required');
-    expect(() => createMatrix(undefined, 1)).toThrowError('n is required');
+    expect(() => createMatrix()).toThrowError("n is required");
+    expect(() => createMatrix(undefined, 1)).toThrowError("n is required");
   });
 
   test("throws error with second parameter missing", () => {
-    expect(() => createMatrix(1,)).toThrowError('fill is required');
-    expect(() => createMatrix(1, undefined)).toThrowError('fill is required');
+    expect(() => createMatrix(1)).toThrowError("fill is required");
+    expect(() => createMatrix(1, undefined)).toThrowError("fill is required");
   });
 });
 
 describe("areWeCovered", () => {
   test("returns true if all rota are covered", () => {
     const rosta = [
-      { "name": "Sally", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] },
-      { "name": "Pedro", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Saturday", "Sunday"] },
-      { "name": "Darmok", "rota": ["Monday", "Thursday", "Sunday"] },
-      { "name": "Jalad", "rota": ["Tuesday", "Wednesday", "Saturday"] },
-      { "name": "Kahless", "rota": ["Friday", "Saturday"] },
-      { "name": "Kirom", "rota": ["Friday", "Saturday", "Sunday"] },
+      {
+        name: "Sally",
+        rota: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      },
+      {
+        name: "Pedro",
+        rota: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Saturday",
+          "Sunday",
+        ],
+      },
+      { name: "Darmok", rota: ["Monday", "Thursday", "Sunday"] },
+      { name: "Jalad", rota: ["Tuesday", "Wednesday", "Saturday"] },
+      { name: "Kahless", rota: ["Friday", "Saturday"] },
+      { name: "Kirom", rota: ["Friday", "Saturday", "Sunday"] },
     ];
     expect(areWeCovered(rosta, "Monday")).toBe(true);
     expect(areWeCovered(rosta, "Tuesday")).toBe(true);
@@ -234,8 +292,30 @@ describe("areWeCovered", () => {
   });
   test("returns false if all rota is incomplete", () => {
     const rosta = [
-      { "name": "Sally", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] },
-      { "name": "Pedro", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] }
+      {
+        name: "Sally",
+        rota: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+      },
+      {
+        name: "Pedro",
+        rota: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+      },
     ];
     expect(areWeCovered(rosta, "Monday")).toBe(false);
     expect(areWeCovered(rosta, "Tuesday")).toBe(false);
@@ -248,9 +328,42 @@ describe("areWeCovered", () => {
 
   test("returns true if all days are covered", () => {
     const rosta = [
-      { "name": "Molly", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] },
-      { "name": "Henry", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] },
-      { "name": "Wintermute", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] }
+      {
+        name: "Molly",
+        rota: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+      },
+      {
+        name: "Henry",
+        rota: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+      },
+      {
+        name: "Wintermute",
+        rota: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+      },
     ];
     expect(areWeCovered(rosta, "Monday")).toBe(true);
     expect(areWeCovered(rosta, "Tuesday")).toBe(true);
@@ -261,15 +374,24 @@ describe("areWeCovered", () => {
     expect(areWeCovered(rosta, "Sunday")).toBe(true);
   });
 
-
   test("test if all days but Monday are covered", () => {
     const rosta = [
-      { "name": "Sally", "rota": ["Tuesday", "Wednesday", "Thursday", "Friday"] },
-      { "name": "Pedro", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Saturday", "Sunday"] },
-      { "name": "Darmok", "rota": ["Monday", "Thursday", "Sunday"] },
-      { "name": "Jalad", "rota": ["Tuesday", "Wednesday", "Saturday"] },
-      { "name": "Kahless", "rota": ["Friday"] },
-      { "name": "Kirom", "rota": ["Friday", "Saturday", "Sunday"] },
+      { name: "Sally", rota: ["Tuesday", "Wednesday", "Thursday", "Friday"] },
+      {
+        name: "Pedro",
+        rota: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Saturday",
+          "Sunday",
+        ],
+      },
+      { name: "Darmok", rota: ["Monday", "Thursday", "Sunday"] },
+      { name: "Jalad", rota: ["Tuesday", "Wednesday", "Saturday"] },
+      { name: "Kahless", rota: ["Friday"] },
+      { name: "Kirom", rota: ["Friday", "Saturday", "Sunday"] },
     ];
     expect(areWeCovered(rosta, "Monday")).toBe(false);
     expect(areWeCovered(rosta, "Tuesday")).toBe(true);
@@ -282,12 +404,18 @@ describe("areWeCovered", () => {
 
   test("test if all days but Tuesday are covered", () => {
     const rosta = [
-      { "name": "Sally", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] },
-      { "name": "Pedro", "rota": ["Monday", "Wednesday", "Thursday", "Saturday", "Sunday"] },
-      { "name": "Darmok", "rota": ["Monday", "Thursday", "Sunday"] },
-      { "name": "Jalad", "rota": ["Tuesday", "Wednesday", "Saturday"] },
-      { "name": "Kahless", "rota": ["Friday"] },
-      { "name": "Kirom", "rota": ["Friday", "Saturday", "Sunday"] },
+      {
+        name: "Sally",
+        rota: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      },
+      {
+        name: "Pedro",
+        rota: ["Monday", "Wednesday", "Thursday", "Saturday", "Sunday"],
+      },
+      { name: "Darmok", rota: ["Monday", "Thursday", "Sunday"] },
+      { name: "Jalad", rota: ["Tuesday", "Wednesday", "Saturday"] },
+      { name: "Kahless", rota: ["Friday"] },
+      { name: "Kirom", rota: ["Friday", "Saturday", "Sunday"] },
     ];
     expect(areWeCovered(rosta, "Monday")).toBe(true);
     expect(areWeCovered(rosta, "Tuesday")).toBe(false);
@@ -300,12 +428,25 @@ describe("areWeCovered", () => {
 
   test("test if all days but Wednesday are covered", () => {
     const rosta = [
-      { "name": "Sally", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] },
-      { "name": "Pedro", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Saturday", "Sunday"] },
-      { "name": "Darmok", "rota": ["Monday", "Thursday", "Sunday"] },
-      { "name": "Jalad", "rota": ["Tuesday", "Saturday"] },
-      { "name": "Kahless", "rota": ["Friday"] },
-      { "name": "Kirom", "rota": ["Friday", "Saturday", "Sunday"] },
+      {
+        name: "Sally",
+        rota: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      },
+      {
+        name: "Pedro",
+        rota: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Saturday",
+          "Sunday",
+        ],
+      },
+      { name: "Darmok", rota: ["Monday", "Thursday", "Sunday"] },
+      { name: "Jalad", rota: ["Tuesday", "Saturday"] },
+      { name: "Kahless", rota: ["Friday"] },
+      { name: "Kirom", rota: ["Friday", "Saturday", "Sunday"] },
     ];
     expect(areWeCovered(rosta, "Monday")).toBe(true);
     expect(areWeCovered(rosta, "Tuesday")).toBe(true);
@@ -318,12 +459,25 @@ describe("areWeCovered", () => {
 
   test("test if all days but Thursday are covered", () => {
     const rosta = [
-      { "name": "Sally", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] },
-      { "name": "Pedro", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Saturday", "Sunday"] },
-      { "name": "Darmok", "rota": ["Monday", "Sunday"] },
-      { "name": "Jalad", "rota": ["Tuesday", "Wednesday", "Saturday"] },
-      { "name": "Kahless", "rota": ["Friday"] },
-      { "name": "Kirom", "rota": ["Friday", "Saturday", "Sunday"] },
+      {
+        name: "Sally",
+        rota: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      },
+      {
+        name: "Pedro",
+        rota: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Saturday",
+          "Sunday",
+        ],
+      },
+      { name: "Darmok", rota: ["Monday", "Sunday"] },
+      { name: "Jalad", rota: ["Tuesday", "Wednesday", "Saturday"] },
+      { name: "Kahless", rota: ["Friday"] },
+      { name: "Kirom", rota: ["Friday", "Saturday", "Sunday"] },
     ];
     expect(areWeCovered(rosta, "Monday")).toBe(true);
     expect(areWeCovered(rosta, "Tuesday")).toBe(true);
@@ -334,15 +488,27 @@ describe("areWeCovered", () => {
     expect(areWeCovered(rosta, "Sunday")).toBe(true);
   });
 
-
   test("test if all days but Friday are covered", () => {
     const rosta = [
-      { "name": "Sally", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] },
-      { "name": "Pedro", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Saturday", "Sunday"] },
-      { "name": "Darmok", "rota": ["Monday", "Thursday", "Sunday"] },
-      { "name": "Jalad", "rota": ["Tuesday", "Wednesday", "Saturday"] },
-      { "name": "Kahless", "rota": [] },
-      { "name": "Kirom", "rota": ["Friday", "Saturday", "Sunday"] },
+      {
+        name: "Sally",
+        rota: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      },
+      {
+        name: "Pedro",
+        rota: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Saturday",
+          "Sunday",
+        ],
+      },
+      { name: "Darmok", rota: ["Monday", "Thursday", "Sunday"] },
+      { name: "Jalad", rota: ["Tuesday", "Wednesday", "Saturday"] },
+      { name: "Kahless", rota: [] },
+      { name: "Kirom", rota: ["Friday", "Saturday", "Sunday"] },
     ];
     expect(areWeCovered(rosta, "Monday")).toBe(true);
     expect(areWeCovered(rosta, "Tuesday")).toBe(true);
@@ -355,12 +521,25 @@ describe("areWeCovered", () => {
 
   test("test if all dats but Saturday are covered", () => {
     const rosta = [
-      { "name": "Sally", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] },
-      { "name": "Pedro", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Saturday", "Sunday"] },
-      { "name": "Darmok", "rota": ["Monday", "Thursday", "Sunday"] },
-      { "name": "Jalad", "rota": ["Tuesday", "Wednesday", "Saturday"] },
-      { "name": "Kahless", "rota": ["Friday"] },
-      { "name": "Kirom", "rota": ["Friday", "Sunday"] },
+      {
+        name: "Sally",
+        rota: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      },
+      {
+        name: "Pedro",
+        rota: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Saturday",
+          "Sunday",
+        ],
+      },
+      { name: "Darmok", rota: ["Monday", "Thursday", "Sunday"] },
+      { name: "Jalad", rota: ["Tuesday", "Wednesday", "Saturday"] },
+      { name: "Kahless", rota: ["Friday"] },
+      { name: "Kirom", rota: ["Friday", "Sunday"] },
     ];
     expect(areWeCovered(rosta, "Monday")).toBe(true);
     expect(areWeCovered(rosta, "Tuesday")).toBe(true);
@@ -373,12 +552,25 @@ describe("areWeCovered", () => {
 
   test("test if all days but Sunday are covered", () => {
     const rosta = [
-      { "name": "Sally", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] },
-      { "name": "Pedro", "rota": ["Monday", "Tuesday", "Wednesday", "Thursday", "Saturday", "Sunday"] },
-      { "name": "Darmok", "rota": ["Monday", "Thursday"] },
-      { "name": "Jalad", "rota": ["Tuesday", "Wednesday", "Saturday"] },
-      { "name": "Kahless", "rota": ["Friday"] },
-      { "name": "Kirom", "rota": ["Friday", "Saturday", "Sunday"] },
+      {
+        name: "Sally",
+        rota: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      },
+      {
+        name: "Pedro",
+        rota: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Saturday",
+          "Sunday",
+        ],
+      },
+      { name: "Darmok", rota: ["Monday", "Thursday"] },
+      { name: "Jalad", rota: ["Tuesday", "Wednesday", "Saturday"] },
+      { name: "Kahless", rota: ["Friday"] },
+      { name: "Kirom", rota: ["Friday", "Saturday", "Sunday"] },
     ];
     expect(areWeCovered(rosta, "Monday")).toBe(true);
     expect(areWeCovered(rosta, "Tuesday")).toBe(true);
@@ -388,5 +580,4 @@ describe("areWeCovered", () => {
     expect(areWeCovered(rosta, "Saturday")).toBe(true);
     expect(areWeCovered(rosta, "Sunday")).toBe(false);
   });
-
 });

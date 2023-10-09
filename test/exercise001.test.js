@@ -11,7 +11,6 @@ import {
   simpleFizzBuzz,
 } from "../challenges/exercise001";
 
-
 describe("capitalize", () => {
   test("returns a capitalized string", () => {
     expect(capitalize("")).toBe("");
@@ -28,7 +27,9 @@ describe("capitalize", () => {
 
   test("does nothing if the string is already capitalized", () => {
     expect(capitalize("Hello")).toBe("Hello");
-    expect(capitalize("Hello dolly, well hello")).toBe("Hello dolly, well hello");
+    expect(capitalize("Hello dolly, well hello")).toBe(
+      "Hello dolly, well hello"
+    );
   });
 });
 
@@ -37,19 +38,29 @@ describe("generateInitials", () => {
     expect(generateInitials("Frederic", "Bonneville")).toBe("F.B");
   });
   test("throws error if either name is empty or not passed", () => {
-    expect(() => generateInitials(undefined, "OOPS")).toThrow('firstName is required');
-    expect(() => generateInitials("OOPS", undefined)).toThrow('lastName is required');
-    expect(() => generateInitials("", "OOPS")).toThrow('firstName is required');
-    expect(() => generateInitials("OOPS", "")).toThrow('lastName is required');
+    expect(() => generateInitials(undefined, "OOPS")).toThrow(
+      "firstName is required"
+    );
+    expect(() => generateInitials("OOPS", undefined)).toThrow(
+      "lastName is required"
+    );
+    expect(() => generateInitials("", "OOPS")).toThrow("firstName is required");
+    expect(() => generateInitials("OOPS", "")).toThrow("lastName is required");
   });
   test("throws error if string is not passed", () => {
-    expect(() => generateInitials(3, "OOPS")).toThrow('firstName must be a string');
-    expect(() => generateInitials("OOPS", /c/)).toThrow('lastName must be a string');
-    expect(() => generateInitials(/x/, "OOPS")).toThrow('firstName must be a string');
-    expect(() => generateInitials("OOPS", 234)).toThrow('lastName must be a string');
+    expect(() => generateInitials(3, "OOPS")).toThrow(
+      "firstName must be a string"
+    );
+    expect(() => generateInitials("OOPS", /c/)).toThrow(
+      "lastName must be a string"
+    );
+    expect(() => generateInitials(/x/, "OOPS")).toThrow(
+      "firstName must be a string"
+    );
+    expect(() => generateInitials("OOPS", 234)).toThrow(
+      "lastName must be a string"
+    );
   });
-
-
 });
 
 describe("addVAT", () => {
@@ -70,9 +81,9 @@ describe("addVAT", () => {
   });
 
   test("error when parameters are missing", () => {
-    expect(() => addVAT(undefined, 20)).toThrow('originalPrice is required');
-    expect(() => addVAT(100, undefined)).toThrow('vatRate is required');
-  })
+    expect(() => addVAT(undefined, 20)).toThrow("originalPrice is required");
+    expect(() => addVAT(100, undefined)).toThrow("vatRate is required");
+  });
 });
 
 describe("getSalePrice", () => {

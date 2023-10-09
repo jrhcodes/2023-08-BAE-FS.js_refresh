@@ -103,7 +103,6 @@ describe("findNeedle", () => {
     expect(findNeedle(obj2, "Dishwasher")).toBe(true);
   });
 
-
   test("returns false if none of the properties of an object contain the specified string", () => {
     const obj1 = {
       name: "LINNMON",

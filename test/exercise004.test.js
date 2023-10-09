@@ -15,7 +15,6 @@ describe("findSmallNums", () => {
     expect(findSmallNums([-7, -243])).toEqual([-7, -243]);
     expect(findSmallNums([100, 88])).toEqual([]);
 
-    
     expect(findSmallNums([])).toEqual([]);
   });
 });
@@ -56,7 +55,7 @@ describe("findVerbs", () => {
       "to squeak",
       "cheesemonger",
       "to",
-      "to "
+      "to ",
     ];
     expect(findVerbs(words)).toEqual(["to eat", "to sneak", "to squeak"]);
   });

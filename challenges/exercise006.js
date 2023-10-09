@@ -12,8 +12,8 @@
  * @returns {Number}
  */
 export const sumMultiples = (arr) => {
-	if (arr === undefined ) throw new Error('arr is required');
-	return arr.filter(num => num % 3 === 0 || num % 5 === 0);
+  if (arr === undefined) throw new Error("arr is required");
+  return arr.filter((num) => num % 3 === 0 || num % 5 === 0);
 };
 
 /**
@@ -22,26 +22,30 @@ export const sumMultiples = (arr) => {
  * @returns {Boolean}
  */
 export const isValidDNA = (str) => {
-	if (str === undefined) throw new Error('str is required');
-	return str.toLowerCase().match(/^[acgt]+$/) != null;
+  if (str === undefined) throw new Error("str is required");
+  return str.toLowerCase().match(/^[acgt]+$/) != null;
 };
 
 /**
- * This function will receive a valid DNA string (see above) and should return a string of the complementary base pairs. 
+ * This function will receive a valid DNA string (see above) and should return a string of the complementary base pairs.
  * In DNA, T always pairs with A, and C always pairs with G. So a string of "ACTG" would have a complementary DNA string of "TGAC".
  * @param {String} str
  * @returns {String}
  */
 export const getComplementaryDNA = (str) => {
-	const complementaryDNA = {
-		"a" : "T",
-		"c" : "G",
-        "g" : "C",
-        "t" : "A",
-	}
-	if (str === undefined) throw new Error('str is required');
-	if (!isValidDNA(str)) throw new Error('str is not a valid DNA sequence');
-	return str.toLowerCase().split("").map(char => complementaryDNA[char]).join("");
+  const complementaryDNA = {
+    a: "T",
+    c: "G",
+    g: "C",
+    t: "A",
+  };
+  if (str === undefined) throw new Error("str is required");
+  if (!isValidDNA(str)) throw new Error("str is not a valid DNA sequence");
+  return str
+    .toLowerCase()
+    .split("")
+    .map((char) => complementaryDNA[char])
+    .join("");
 };
 
 /**
@@ -50,17 +54,17 @@ export const getComplementaryDNA = (str) => {
  * @returns {Boolean}
  */
 export const isItPrime = (n) => {
-	if (n === undefined) throw new Error('n is required');
-	
-	if ( n===2 || n===3  ) return true;
+  if (n === undefined) throw new Error("n is required");
 
-	if (n <= 1 || n % 1.0 !== 0 || n % 2 == 0 || n % 3 == 0 ) return false;
-	
-    const limit =  Math.floor(Math.sqrt(n))+1;
-	for (let i = 5; i <= limit; i+=2) {	
-        if (n % i === 0 ) return false;
-    }
-	return true;
+  if (n === 2 || n === 3) return true;
+
+  if (n <= 1 || n % 1.0 !== 0 || n % 2 == 0 || n % 3 == 0) return false;
+
+  const limit = Math.floor(Math.sqrt(n)) + 1;
+  for (let i = 5; i <= limit; i += 2) {
+    if (n % i === 0) return false;
+  }
+  return true;
 };
 
 /**
@@ -75,9 +79,9 @@ export const isItPrime = (n) => {
  * @returns {Array}
  */
 export const createMatrix = (n, fill) => {
-	if (n === undefined) throw new Error('n is required');
-	if (fill === undefined) throw new Error('fill is required');
-	return Array.from({ length: n }, () => Array(n).fill(fill));
+  if (n === undefined) throw new Error("n is required");
+  if (fill === undefined) throw new Error("fill is required");
+  return Array.from({ length: n }, () => Array(n).fill(fill));
 };
 
 /**
@@ -87,17 +91,21 @@ export const createMatrix = (n, fill) => {
  *  { name: "Pedro", rota: ["Saturday", "Sunday", "Tuesday", "Wednesday"] },
  *  ...etc
  * ]
- * and a day of the week. 
- * For the café to run successfully, at least 3 staff members are required per day. 
- * The function should return true/false depending on whether 
+ * and a day of the week.
+ * For the café to run successfully, at least 3 staff members are required per day.
+ * The function should return true/false depending on whether
  * there are enough staff scheduled for the given day.
  * @param {Array} staff
  * @param {String} day
  * @returns {Boolean}
  */
 export const areWeCovered = (staff, day) => {
-	if (staff === undefined) throw new Error('staff is required');
-	if (day === undefined) throw new Error('day is required');
-	return staff.reduce((total, staffMember) => total + (staffMember.rota.includes(day) ? 1: 0), 0) >= 3;
-}
-
+  if (staff === undefined) throw new Error("staff is required");
+  if (day === undefined) throw new Error("day is required");
+  return (
+    staff.reduce(
+      (total, staffMember) => total + (staffMember.rota.includes(day) ? 1 : 0),
+      0
+    ) >= 3
+  );
+};

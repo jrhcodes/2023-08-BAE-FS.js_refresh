@@ -2,12 +2,12 @@
 
 This first set of challenges focus on the following skills:
 
--   Working with primitive data types (strings, numbers, booleans, null, undefined)
--   Operators
--   Functions
--   Working with complex data types (objects, arrays)
--   Conditional logic (if statements, switch statements)
--   Looping over arrays
+- Working with primitive data types (strings, numbers, booleans, null, undefined)
+- Operators
+- Functions
+- Working with complex data types (objects, arrays)
+- Conditional logic (if statements, switch statements)
+- Looping over arrays
 
 👉 Run `npm test test/exercise001.test.js`
 
